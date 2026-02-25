@@ -238,16 +238,31 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;o
 .port-body p{font-size:.79rem;color:#8a8a9a;line-height:1.5}
 
 /* ===== TESTIMONIALS ===== */
-.testi-bg{background:#0f0f1a}
-.testi-cards{display:flex;flex-direction:column;gap:14px;margin-top:28px}
-.testi-card{background:#161625;border:1px solid rgba(255,255,255,.06);border-radius:28px;padding:22px 20px}
-.t-stars{color:#c8963c;letter-spacing:2px;font-size:.82rem;margin-bottom:14px}
-.t-big-quote{font-family:'Cormorant Garamond',serif;font-size:3rem;color:rgba(200,150,60,.18);line-height:.7;margin-bottom:10px;display:block}
-.t-text{font-size:.88rem;color:#c5c0b8;line-height:1.75;font-style:italic;margin-bottom:18px}
-.t-author{display:flex;align-items:center;gap:12px}
-.t-ava{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#c8963c,#e84d2a);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff;flex-shrink:0}
-.t-name{font-size:.88rem;font-weight:600;line-height:1.2;margin-bottom:3px}
-.t-role{font-size:.73rem;color:#5a5a6e}
+/* ===== DEMO PORTFOLIO SECTION ===== */
+.demo-bg{background:#0f0f1a}
+.demo-filter{display:flex;gap:6px;flex-wrap:wrap;margin:20px 0 24px}
+.demo-filter-btn{background:none;border:1px solid rgba(255,255,255,.12);color:#8a8a9a;font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:600;padding:7px 14px;border-radius:100px;cursor:pointer;transition:all .2s;-webkit-appearance:none}
+.demo-filter-btn.active,.demo-filter-btn:active{background:linear-gradient(135deg,#c8963c,#eab96a);color:#080810;border-color:transparent}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.demo-card{background:#161625;border:1px solid rgba(255,255,255,.07);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .2s}
+.demo-card:active{transform:scale(.98);border-color:rgba(200,150,60,.3)}
+.demo-preview{position:relative;height:140px;background:#0d0d1f;overflow:hidden;flex-shrink:0}
+.demo-iframe-wrap{width:100%;height:100%;overflow:hidden;pointer-events:none;position:relative}
+.demo-iframe-wrap iframe{width:200%;height:200%;transform:scale(.5);transform-origin:top left;border:none;pointer-events:none}
+.demo-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(13,13,31,.95));z-index:1}
+.demo-cat-tag{position:absolute;top:10px;left:10px;z-index:2;background:rgba(8,8,16,.75);border:1px solid rgba(200,150,60,.3);color:#eab96a;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:100px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.demo-live-dot{position:absolute;top:10px;right:10px;z-index:2;display:flex;align-items:center;gap:4px;background:rgba(8,8,16,.75);border:1px solid rgba(74,222,128,.3);color:#4ade80;font-size:.58rem;font-weight:600;padding:3px 8px;border-radius:100px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.demo-live-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;animation:dot-blink 2s infinite;flex-shrink:0}
+.demo-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column}
+.demo-name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:.98rem;line-height:1.2;margin-bottom:4px;color:#ede9e0}
+.demo-desc{font-size:.73rem;color:#8a8a9a;line-height:1.45;flex:1;margin-bottom:10px}
+.demo-link{display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:9px;border-radius:11px;background:rgba(200,150,60,.1);border:1px solid rgba(200,150,60,.25);color:#eab96a;font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:700;text-decoration:none;letter-spacing:.03em;transition:background .2s,transform .15s}
+.demo-link:active{background:rgba(200,150,60,.2);transform:scale(.97)}
+.demo-link-icon{font-size:.8rem}
+/* fallback emoji thumb when iframe not supported */
+.demo-emoji-thumb{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:6px}
+.demo-emoji-thumb span:first-child{font-size:2.2rem}
+.demo-emoji-thumb span:last-child{font-size:.62rem;color:#5a5a6e;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
 
 /* ===== FAQ ===== */
 .faq-bg{background:#080810}
@@ -925,15 +940,194 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;o
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testi-bg" id="testimonials">
+<section class="demo-bg" id="testimonials">
   <div class="wrap">
-    <div class="sec-label sr">Khách Hàng Nói Gì</div>
-    <h2 class="font-display text-lg sr d1">Họ Tin<br><em class="text-gold">PixelForge</em></h2>
-    <div class="testi-cards">
-      <div class="testi-card sr d1"><div class="t-stars">★★★★★</div><span class="t-big-quote">"</span><p class="t-text">Website làm xong đẹp hơn tôi tưởng tượng rất nhiều. Team nhiệt tình, phản hồi nhanh, chỉnh sửa ngay. Doanh thu online tăng 40% sau 2 tháng bàn giao.</p><div class="t-author"><div class="t-ava">T</div><div><div class="t-name">Chị Thanh Hà</div><div class="t-role">CEO · Thời trang HANA</div></div></div></div>
-      <div class="testi-card sr d2"><div class="t-stars">★★★★★</div><span class="t-big-quote">"</span><p class="t-text">Đã làm qua 3 đơn vị khác nhưng đây là lần đầu tôi thực sự hài lòng. Code sạch, tốc độ rất nhanh và hỗ trợ sau bàn giao rất tốt.</p><div class="t-author"><div class="t-ava" style="background:linear-gradient(135deg,#0068ff,#00aaff)">M</div><div><div class="t-name">Anh Minh Tuấn</div><div class="t-role">Chủ phòng khám · NhaTiên Dental</div></div></div></div>
-      <div class="testi-card sr d3"><div class="t-stars">★★★★★</div><span class="t-big-quote">"</span><p class="t-text">Landing page làm lead về ào ào, chi phí quảng cáo giảm 30% vì tỉ lệ chuyển đổi tăng mạnh. PixelForge thực sự hiểu marketing chuyên sâu.</p><div class="t-author"><div class="t-ava" style="background:linear-gradient(135deg,#e84d2a,#ff8c00)">P</div><div><div class="t-name">Anh Phúc Nguyễn</div><div class="t-role">Marketing Manager · EduPlus</div></div></div></div>
+    <div class="sec-label sr">Dự Án Thực Tế</div>
+    <h2 class="font-display text-lg sr d1">Portfolio<br><em class="text-gold">Live Demo</em></h2>
+    <p style="font-size:.85rem;color:#8a8a9a;margin-top:8px;margin-bottom:0" class="sr d2">10 website thật đã bàn giao — bấm xem demo trực tiếp</p>
+
+    <!-- Filter tabs -->
+    <div class="demo-filter sr d2">
+      <button class="demo-filter-btn active" onclick="filterDemo('all',this)">Tất Cả</button>
+      <button class="demo-filter-btn" onclick="filterDemo('fnb',this)">F&amp;B</button>
+      <button class="demo-filter-btn" onclick="filterDemo('beauty',this)">Làm Đẹp</button>
+      <button class="demo-filter-btn" onclick="filterDemo('business',this)">Doanh Nghiệp</button>
+      <button class="demo-filter-btn" onclick="filterDemo('other',this)">Khác</button>
     </div>
+
+    <div class="demo-grid sr d3" id="demoGrid">
+
+      <!-- BAR -->
+      <div class="demo-card" data-demo="fnb">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/bar/" loading="lazy" title="Bar Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Bar & Pub</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">The Dark Bar</div>
+          <div class="demo-desc">Landing page quán bar phong cách tối — menu cocktail, đặt bàn online</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/bar/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- CAFE -->
+      <div class="demo-card" data-demo="fnb">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/cafe/" loading="lazy" title="Cafe Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Café</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">Brew & Co. Café</div>
+          <div class="demo-desc">Web café hiện đại — menu, không gian, đặt chỗ & giờ mở cửa</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/cafe/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- COMPANY -->
+      <div class="demo-card" data-demo="business">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/company/" loading="lazy" title="Company Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Doanh Nghiệp</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">Corporate Pro</div>
+          <div class="demo-desc">Website công ty chuẩn SEO — giới thiệu, dịch vụ, đội ngũ & liên hệ</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/company/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- COURSE -->
+      <div class="demo-card" data-demo="other">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/course/" loading="lazy" title="Course Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Giáo Dục</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">EduPro Course</div>
+          <div class="demo-desc">Landing page khóa học online — syllabus, giảng viên & đăng ký học</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/course/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- NAIL -->
+      <div class="demo-card" data-demo="beauty">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/nail/" loading="lazy" title="Nail Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Nail & Beauty</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">Glamour Nail Studio</div>
+          <div class="demo-desc">Web tiệm nail sang trọng — bảng giá, gallery mẫu, đặt lịch Zalo</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/nail/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="demo-card" data-demo="other">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/profile/" loading="lazy" title="Profile Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Cá Nhân</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">Personal Portfolio</div>
+          <div class="demo-desc">Website cá nhân / freelancer — kỹ năng, dự án & liên hệ tuyển dụng</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/profile/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- REAL ESTATE -->
+      <div class="demo-card" data-demo="business">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/real-estate/" loading="lazy" title="Real Estate Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Bất Động Sản</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">Prestige Realty</div>
+          <div class="demo-desc">Landing page BDS cao cấp — dự án nổi bật, form lead & hotline</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/real-estate/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- SALON -->
+      <div class="demo-card" data-demo="beauty">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/salon/" loading="lazy" title="Salon Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Salon Tóc</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">Luxe Hair Salon</div>
+          <div class="demo-desc">Web salon tóc cao cấp — dịch vụ, stylist, gallery & đặt lịch online</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/salon/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- SHOP -->
+      <div class="demo-card" data-demo="business">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/shop/" loading="lazy" title="Shop Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Shop Online</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">TrendShop Store</div>
+          <div class="demo-desc">Landing page shop bán hàng — sản phẩm, giỏ hàng & thanh toán</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/shop/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+      <!-- SPA -->
+      <div class="demo-card" data-demo="beauty">
+        <div class="demo-preview">
+          <div class="demo-iframe-wrap">
+            <iframe src="https://nghjakz133.github.io/website-3-ngay/demos/spa/" loading="lazy" title="Spa Demo" scrolling="no"></iframe>
+          </div>
+          <div class="demo-overlay"></div>
+          <span class="demo-cat-tag">Spa & Wellness</span>
+          <span class="demo-live-dot">Live</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-name">Serenity Spa</div>
+          <div class="demo-desc">Web spa thư giãn — liệu trình, phòng trị liệu, đặt lịch & ưu đãi</div>
+          <a href="https://nghjakz133.github.io/website-3-ngay/demos/spa/" target="_blank" rel="noopener" class="demo-link"><span class="demo-link-icon">🔗</span> Xem Demo</a>
+        </div>
+      </div>
+
+    </div><!-- end demo-grid -->
   </div>
 </section>
 
@@ -1106,6 +1300,17 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;o
       if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
     });
   });
+
+  // Demo filter
+  function filterDemo(cat,btn){
+    document.querySelectorAll('.demo-filter-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    document.querySelectorAll('.demo-card').forEach(function(card){
+      var c=card.getAttribute('data-demo');
+      card.style.display=(cat==='all'||c===cat)?'':'none';
+    });
+  }
+  window.filterDemo=filterDemo;
 
   // Touch feedback on service rows
   document.querySelectorAll('.svc-row').forEach(function(row){
