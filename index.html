@@ -4,433 +4,484 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0c0c0f">
+<meta name="theme-color" content="#080810">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>PixelForge – Thiết Kế Website</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>PixelForge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0; padding: 0;
-  -webkit-tap-highlight-color: transparent;
+/* =====================================================
+   ROOT & RESET
+   ===================================================== */
+:root {
+  --c-bg:      #080810;
+  --c-bg2:     #0f0f1a;
+  --c-bg3:     #161625;
+  --c-surf:    #1c1c2e;
+  --c-line:    rgba(255,255,255,0.06);
+  --c-line2:   rgba(255,255,255,0.12);
+  --c-gold:    #c8963c;
+  --c-gold2:   #eab96a;
+  --c-gold3:   rgba(200,150,60,0.10);
+  --c-red:     #e84d2a;
+  --c-white:   #ede9e0;
+  --c-dim:     #5a5a6e;
+  --c-dim2:    #8a8a9a;
+  --c-zalo:    #0068ff;
+  --r-sm:      12px;
+  --r-md:      16px;
+  --r-lg:      20px;
+  --r-xl:      28px;
+  --sp-page:   20px;
 }
 
-:root {
-–bg:       #0c0c0f;
-–bg2:      #131318;
-–bg3:      #1a1a22;
-–surface:  #1e1e28;
-–line:     rgba(255,255,255,0.07);
-–gold:     #d4a843;
-–gold2:    #f0c96a;
-–gold-dim: rgba(212,168,67,0.12);
-–red:      #f04c2f;
-–white:    #f0ece4;
-–muted:    #6b6b7a;
-–muted2:   #9a9aaa;
-–safe-top: env(safe-area-inset-top, 0px);
-–safe-bot: env(safe-area-inset-bottom, 0px);
+*, *::before, *::after {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+-webkit-tap-highlight-color: transparent;
 }
 
 html {
-scroll-behavior: smooth;
 font-size: 16px;
+scroll-behavior: smooth;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
+overflow-x: hidden;
 }
 
 body {
-background: var(–bg);
-color: var(–white);
-font-family: ‘DM Sans’, sans-serif;
+font-family: ‘Outfit’, sans-serif;
 font-weight: 400;
+background: var(–c-bg);
+color: var(–c-white);
 line-height: 1.6;
 overflow-x: hidden;
-min-height: 100vh;
+width: 100%;
+max-width: 100vw;
+position: relative;
 }
 
-/* ============================================================
+/* block tất cả overflow ngang */
+
+- { max-width: 100%; }
+
+img, video, iframe, svg { max-width: 100%; height: auto; }
+
+/* =====================================================
 TYPOGRAPHY
-============================================================ */
-.display {
-font-family: ‘Fraunces’, serif;
-font-weight: 900;
-letter-spacing: -0.03em;
+===================================================== */
+.font-display {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 700;
+letter-spacing: -0.02em;
 line-height: 1.05;
 }
-.display-lg { font-size: clamp(2.6rem, 11vw, 4rem); }
-.display-md { font-size: clamp(1.9rem, 8vw, 2.8rem); }
-.display-sm { font-size: clamp(1.4rem, 6vw, 2rem); }
 
-.italic { font-style: italic; }
+.text-xl  { font-size: clamp(2.4rem, 10vw, 3.6rem); }
+.text-lg  { font-size: clamp(1.8rem, 7.5vw, 2.6rem); }
+.text-md  { font-size: clamp(1.3rem, 5.5vw, 1.8rem); }
 
-.gold-text {
-background: linear-gradient(135deg, var(–gold), var(–gold2));
+.text-gold {
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 }
 
-.label {
-font-size: 0.7rem;
+.text-dim  { color: var(–c-dim2); }
+.text-body { font-size: 0.92rem; line-height: 1.75; color: var(–c-dim2); }
+
+/* =====================================================
+LAYOUT
+===================================================== */
+.wrap {
+width: 100%;
+padding-left: var(–sp-page);
+padding-right: var(–sp-page);
+}
+
+section { padding: 68px 0; }
+
+/* =====================================================
+SECTION LABEL
+===================================================== */
+.sec-label {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-size: 0.68rem;
 font-weight: 600;
 letter-spacing: 0.18em;
 text-transform: uppercase;
-color: var(–gold);
-display: flex;
-align-items: center;
-gap: 10px;
+color: var(–c-gold);
+margin-bottom: 12px;
 }
-.label::before {
+.sec-label::before {
 content: ‘’;
 display: block;
-width: 20px;
+width: 18px;
 height: 1px;
-background: var(–gold);
+background: var(–c-gold);
 flex-shrink: 0;
 }
 
-/* ============================================================
-LAYOUT
-============================================================ */
-.container {
-padding: 0 20px;
-max-width: 480px;
-margin: 0 auto;
+/* =====================================================
+BUTTONS
+===================================================== */
+.btn {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+width: 100%;
+padding: 16px 20px;
+border-radius: var(–r-md);
+font-family: ‘Outfit’, sans-serif;
+font-weight: 600;
+font-size: 0.93rem;
+text-decoration: none;
+border: none;
+cursor: pointer;
+transition: transform 0.18s, box-shadow 0.18s;
+-webkit-appearance: none;
+}
+.btn:active { transform: scale(0.96); }
+
+.btn-primary {
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
+color: var(–c-bg);
+box-shadow: 0 6px 28px rgba(200,150,60,0.30);
+}
+.btn-primary:active { box-shadow: 0 2px 12px rgba(200,150,60,0.20); }
+
+.btn-ghost {
+background: var(–c-surf);
+color: var(–c-white);
+border: 1px solid var(–c-line2);
 }
 
-section {
-padding: 72px 0;
+.btn-zalo {
+background: var(–c-zalo);
+color: #fff;
+box-shadow: 0 6px 28px rgba(0,104,255,0.28);
 }
 
-/* ============================================================
-NOISE OVERLAY
-============================================================ */
-body::after {
+/* =====================================================
+NOISE LAYER
+===================================================== */
+body::before {
 content: ‘’;
 position: fixed;
 inset: 0;
 pointer-events: none;
-z-index: 9999;
-opacity: 0.025;
-background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘300’ height=‘300’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.85’ numOctaves=‘4’/%3E%3C/filter%3E%3Crect width=‘300’ height=‘300’ filter=‘url(%23n)’/%3E%3C/svg%3E”);
+z-index: 999;
+opacity: 0.03;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘200’ height=‘200’%3E%3Cfilter id=‘f’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’/%3E%3C/filter%3E%3Crect width=‘200’ height=‘200’ filter=‘url(%23f)’/%3E%3C/svg%3E”);
 }
 
-/* ============================================================
+/* =====================================================
 NAVBAR
-============================================================ */
+===================================================== */
 .navbar {
 position: fixed;
 top: 0;
-left: 0; right: 0;
-z-index: 900;
-padding: calc(var(–safe-top) + 12px) 20px 12px;
+left: 0;
+right: 0;
+z-index: 500;
+width: 100%;
+}
+
+.navbar-inner {
 display: flex;
 align-items: center;
 justify-content: space-between;
-background: rgba(12,12,15,0.88);
-backdrop-filter: blur(24px) saturate(180%);
--webkit-backdrop-filter: blur(24px) saturate(180%);
-border-bottom: 1px solid var(–line);
+padding: 14px var(–sp-page);
+background: rgba(8,8,16,0.85);
+backdrop-filter: blur(20px) saturate(160%);
+-webkit-backdrop-filter: blur(20px) saturate(160%);
+border-bottom: 1px solid var(–c-line);
 transition: background 0.3s;
 }
 
 .logo {
-font-family: ‘Fraunces’, serif;
-font-weight: 900;
-font-size: 1.35rem;
-letter-spacing: -0.03em;
-background: linear-gradient(135deg, var(–gold), var(–gold2));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-}
-.logo span {
-color: var(–red);
--webkit-text-fill-color: var(–red);
-}
-
-.nav-call {
-display: flex;
-align-items: center;
-gap: 8px;
-background: linear-gradient(135deg, var(–gold), var(–gold2));
-color: var(–bg);
+font-family: ‘Cormorant Garamond’, serif;
 font-weight: 700;
-font-size: 0.8rem;
-letter-spacing: 0.04em;
-padding: 9px 16px;
-border-radius: 100px;
-text-decoration: none;
-transition: transform 0.2s, box-shadow 0.2s;
-white-space: nowrap;
-}
-.nav-call:active { transform: scale(0.96); }
-
-/* ============================================================
-HERO
-============================================================ */
-.hero {
-min-height: 100svh;
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-padding-bottom: 48px;
-padding-top: calc(var(–safe-top) + 80px);
-position: relative;
-overflow: hidden;
-}
-
-.hero-bg {
-position: absolute;
-inset: 0;
-background:
-radial-gradient(ellipse 100% 60% at 50% 0%, rgba(212,168,67,0.1) 0%, transparent 60%),
-radial-gradient(ellipse 70% 50% at 100% 80%, rgba(240,76,47,0.06) 0%, transparent 50%);
-}
-
-.hero-grid {
-position: absolute;
-inset: 0;
-background-image:
-linear-gradient(var(–line) 1px, transparent 1px),
-linear-gradient(90deg, var(–line) 1px, transparent 1px);
-background-size: 60px 60px;
-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
--webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
-}
-
-.hero-orb {
-position: absolute;
-width: 280px;
-height: 280px;
-border-radius: 50%;
-top: -80px;
-right: -80px;
-background: radial-gradient(circle, rgba(212,168,67,0.15) 0%, transparent 70%);
-animation: breathe 5s ease-in-out infinite;
-}
-
-@keyframes breathe {
-0%, 100% { transform: scale(1); opacity: 0.6; }
-50% { transform: scale(1.15); opacity: 1; }
-}
-
-.hero .container { position: relative; z-index: 1; }
-
-.hero-badge {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-border: 1px solid rgba(212,168,67,0.3);
-background: rgba(212,168,67,0.06);
-border-radius: 100px;
-padding: 6px 14px;
-font-size: 0.72rem;
-font-weight: 500;
-letter-spacing: 0.06em;
-color: var(–gold2);
-margin-bottom: 24px;
-animation: fadeSlide 0.7s ease both;
-}
-
-.badge-dot {
-width: 6px; height: 6px;
-background: var(–gold);
-border-radius: 50%;
-animation: blink 2s infinite;
-}
-@keyframes blink {
-0%, 100% { opacity: 1; }
-50% { opacity: 0.3; }
-}
-
-.hero-title {
-animation: fadeSlide 0.7s 0.08s ease both;
-margin-bottom: 18px;
-}
-
-.hero-desc {
-color: var(–muted2);
-font-size: 0.95rem;
-line-height: 1.75;
-animation: fadeSlide 0.7s 0.16s ease both;
-margin-bottom: 32px;
-}
-
-.hero-btns {
-display: flex;
-flex-direction: column;
-gap: 12px;
-animation: fadeSlide 0.7s 0.24s ease both;
-}
-
-.btn-gold {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-background: linear-gradient(135deg, var(–gold), var(–gold2));
-color: var(–bg);
-font-weight: 700;
-font-size: 0.95rem;
-padding: 17px 24px;
-border-radius: 14px;
-text-decoration: none;
-border: none;
-cursor: pointer;
-transition: transform 0.2s, box-shadow 0.2s;
-box-shadow: 0 8px 32px rgba(212,168,67,0.28);
-}
-.btn-gold:active { transform: scale(0.97); box-shadow: 0 4px 16px rgba(212,168,67,0.2); }
-
-.btn-outline {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-background: transparent;
-border: 1px solid var(–line);
-color: var(–white);
-font-size: 0.95rem;
-font-weight: 500;
-padding: 17px 24px;
-border-radius: 14px;
-text-decoration: none;
-cursor: pointer;
-transition: border-color 0.2s, background 0.2s;
-}
-.btn-outline:active { background: var(–surface); }
-
-.hero-stats {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 1px;
-margin-top: 40px;
-border: 1px solid var(–line);
-border-radius: 16px;
-overflow: hidden;
-animation: fadeSlide 0.7s 0.32s ease both;
-}
-
-.stat {
-background: var(–surface);
-padding: 18px 10px;
-text-align: center;
-}
-
-.stat-n {
-font-family: ‘Fraunces’, serif;
-font-weight: 700;
-font-size: 1.6rem;
-background: linear-gradient(135deg, var(–gold), var(–gold2));
+font-size: 1.45rem;
+letter-spacing: -0.02em;
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 line-height: 1;
-margin-bottom: 4px;
 }
-.stat-l {
-font-size: 0.68rem;
+
+.logo-dot {
+color: var(–c-red);
+-webkit-text-fill-color: var(–c-red);
+}
+
+.nav-btn {
+display: flex;
+align-items: center;
+gap: 6px;
+padding: 9px 16px;
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
+color: var(–c-bg);
+font-family: ‘Outfit’, sans-serif;
+font-weight: 700;
+font-size: 0.78rem;
+letter-spacing: 0.03em;
+border-radius: 100px;
+text-decoration: none;
+border: none;
+white-space: nowrap;
+}
+
+/* =====================================================
+HERO
+===================================================== */
+.hero {
+min-height: 100svh;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+padding-top: 80px;
+padding-bottom: 44px;
+position: relative;
+overflow: hidden;
+width: 100%;
+}
+
+.hero-glow-top {
+position: absolute;
+top: -120px;
+left: 50%;
+transform: translateX(-50%);
+width: 320px;
+height: 320px;
+background: radial-gradient(circle, rgba(200,150,60,0.12) 0%, transparent 70%);
+border-radius: 50%;
+pointer-events: none;
+animation: glow-pulse 6s ease-in-out infinite;
+}
+
+.hero-glow-bot {
+position: absolute;
+bottom: -60px;
+right: -60px;
+width: 200px;
+height: 200px;
+background: radial-gradient(circle, rgba(232,77,42,0.07) 0%, transparent 70%);
+border-radius: 50%;
+pointer-events: none;
+}
+
+@keyframes glow-pulse {
+0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+50%       { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+}
+
+.hero-grid-bg {
+position: absolute;
+inset: 0;
+background-image:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+background-size: 52px 52px;
+mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 70%);
+-webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 70%);
+pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero-badge {
+display: inline-flex;
+align-items: center;
+gap: 7px;
+padding: 6px 13px;
+border: 1px solid rgba(200,150,60,0.28);
+background: rgba(200,150,60,0.06);
+border-radius: 100px;
+font-size: 0.71rem;
 font-weight: 500;
-color: var(–muted);
-letter-spacing: 0.04em;
+color: var(–c-gold2);
+letter-spacing: 0.05em;
+margin-bottom: 22px;
+animation: fade-up 0.6s both;
+}
+
+.live-dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(–c-gold);
+animation: dot-blink 2s infinite;
+flex-shrink: 0;
+}
+
+@keyframes dot-blink {
+0%, 100% { opacity: 1; }
+50%       { opacity: 0.25; }
+}
+
+.hero-title {
+margin-bottom: 18px;
+animation: fade-up 0.6s 0.07s both;
+}
+
+.hero-desc {
+font-size: 0.92rem;
+color: var(–c-dim2);
+line-height: 1.75;
+margin-bottom: 30px;
+animation: fade-up 0.6s 0.14s both;
+}
+
+.hero-ctas {
+display: flex;
+flex-direction: column;
+gap: 10px;
+margin-bottom: 36px;
+animation: fade-up 0.6s 0.21s both;
+}
+
+.hero-stats {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+border: 1px solid var(–c-line2);
+border-radius: var(–r-lg);
+overflow: hidden;
+animation: fade-up 0.6s 0.28s both;
+}
+
+.stat-cell {
+padding: 16px 8px;
+text-align: center;
+background: var(–c-surf);
+}
+.stat-cell + .stat-cell {
+border-left: 1px solid var(–c-line);
+}
+
+.stat-num {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 700;
+font-size: 1.65rem;
+line-height: 1;
+margin-bottom: 4px;
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.stat-lbl {
+font-size: 0.63rem;
+font-weight: 600;
+letter-spacing: 0.07em;
 text-transform: uppercase;
+color: var(–c-dim);
 line-height: 1.3;
 }
 
-@keyframes fadeSlide {
-from { opacity: 0; transform: translateY(24px); }
+@keyframes fade-up {
+from { opacity: 0; transform: translateY(22px); }
 to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ============================================================
+/* =====================================================
 MARQUEE
-============================================================ */
-.marquee-wrap {
+===================================================== */
+.marquee-section {
+width: 100%;
 overflow: hidden;
-border-top: 1px solid var(–line);
-border-bottom: 1px solid var(–line);
-background: rgba(212,168,67,0.02);
-padding: 14px 0;
+border-top: 1px solid var(–c-line);
+border-bottom: 1px solid var(–c-line);
+background: rgba(200,150,60,0.02);
+padding: 13px 0;
 }
 
-.marquee-inner {
+.marquee-track {
 display: flex;
-gap: 0;
-animation: marquee 18s linear infinite;
 width: max-content;
+animation: marquee-run 22s linear infinite;
 }
 
-.m-item {
-padding: 0 24px;
-font-size: 0.78rem;
-font-weight: 500;
-color: var(–muted2);
-white-space: nowrap;
-display: flex;
+.marquee-item {
+display: inline-flex;
 align-items: center;
-gap: 24px;
+gap: 22px;
+padding: 0 22px;
+font-size: 0.75rem;
+font-weight: 500;
+color: var(–c-dim2);
+white-space: nowrap;
 }
-.m-item::after {
+.marquee-item::after {
 content: ‘✦’;
-color: var(–gold);
-font-size: 0.6rem;
+color: var(–c-gold);
+font-size: 0.55rem;
+flex-shrink: 0;
 }
 
-@keyframes marquee {
+@keyframes marquee-run {
 from { transform: translateX(0); }
 to   { transform: translateX(-50%); }
 }
 
-/* ============================================================
+/* =====================================================
 SERVICES
-============================================================ */
-.services-section { background: var(–bg2); }
+===================================================== */
+.services-bg { background: var(–c-bg2); }
 
-.services-cards {
+.svc-list {
 display: flex;
 flex-direction: column;
 gap: 2px;
-margin-top: 36px;
+margin-top: 32px;
+border-radius: var(–r-xl);
+overflow: hidden;
 }
 
-.svc-card {
-background: var(–bg);
-border: 1px solid var(–line);
-border-radius: 0;
-padding: 24px 20px;
+.svc-row {
 display: flex;
-align-items: flex-start;
-gap: 18px;
+align-items: center;
+gap: 16px;
+padding: 20px 18px;
+background: var(–c-bg);
+border: 1px solid var(–c-line);
+margin-bottom: -1px;
 position: relative;
 overflow: hidden;
-transition: background 0.3s;
+transition: background 0.25s;
 }
-.svc-card:first-child { border-radius: 16px 16px 0 0; }
-.svc-card:last-child  { border-radius: 0 0 16px 16px; }
+.svc-row:first-child { border-radius: var(–r-xl) var(–r-xl) 0 0; }
+.svc-row:last-child  { border-radius: 0 0 var(–r-xl) var(–r-xl); margin-bottom: 0; }
 
-.svc-card::before {
+.svc-row::before {
 content: ‘’;
 position: absolute;
 left: 0; top: 0; bottom: 0;
-width: 2px;
-background: linear-gradient(to bottom, var(–gold), transparent);
-opacity: 0;
-transition: opacity 0.3s;
+width: 3px;
+background: linear-gradient(to bottom, var(–c-gold), transparent);
+transform: scaleY(0);
+transform-origin: top;
+transition: transform 0.3s;
 }
-.svc-card.active::before,
-.svc-card:active::before { opacity: 1; }
 
-.svc-icon {
-width: 44px; height: 44px;
-border-radius: 12px;
-background: var(–gold-dim);
-border: 1px solid rgba(212,168,67,0.2);
+.svc-row.touched::before { transform: scaleY(1); }
+.svc-row.touched { background: rgba(200,150,60,0.04); }
+
+.svc-ico {
+width: 46px;
+height: 46px;
+border-radius: 14px;
+background: var(–c-gold3);
+border: 1px solid rgba(200,150,60,0.18);
 display: flex;
 align-items: center;
 justify-content: center;
@@ -438,400 +489,679 @@ font-size: 1.2rem;
 flex-shrink: 0;
 }
 
-.svc-body h3 {
-font-family: ‘Fraunces’, serif;
+.svc-text { flex: 1; min-width: 0; }
+.svc-text h3 {
+font-family: ‘Cormorant Garamond’, serif;
 font-size: 1.05rem;
 font-weight: 700;
-margin-bottom: 6px;
+margin-bottom: 4px;
 line-height: 1.2;
 }
-.svc-body p {
-font-size: 0.85rem;
-color: var(–muted2);
-line-height: 1.65;
+.svc-text p {
+font-size: 0.82rem;
+color: var(–c-dim2);
+line-height: 1.55;
 }
 
 .svc-arrow {
-margin-left: auto;
+color: var(–c-dim);
+font-size: 1.1rem;
 flex-shrink: 0;
-color: var(–muted);
-font-size: 1rem;
-padding-top: 2px;
-transition: color 0.3s, transform 0.3s;
+transition: color 0.25s, transform 0.25s;
 }
-.svc-card:active .svc-arrow { color: var(–gold); transform: translateX(4px); }
+.svc-row.touched .svc-arrow { color: var(–c-gold); transform: translateX(3px); }
 
-/* ============================================================
-FUNNEL
-============================================================ */
-.funnel-section { background: var(–bg); }
+/* =====================================================
+FUNNEL / PRICING - ACCORDION
+===================================================== */
+.funnel-bg { background: var(–c-bg); }
 
-.funnel-intro {
-margin-top: 16px;
-font-size: 0.88rem;
-color: var(–muted2);
+.funnel-note {
+font-size: 0.87rem;
+color: var(–c-dim2);
 line-height: 1.7;
+margin-top: 12px;
+margin-bottom: 28px;
 }
 
-.funnel-steps {
-margin-top: 36px;
+/* –– Tab switcher –– */
+.pkg-tabs {
 display: flex;
-flex-direction: column;
 gap: 0;
-position: relative;
+background: var(–c-surf);
+border: 1px solid var(–c-line2);
+border-radius: var(–r-lg);
+padding: 4px;
+margin-bottom: 16px;
+overflow: hidden;
 }
 
-.funnel-line {
-position: absolute;
-left: 30px;
-top: 0; bottom: 0;
-width: 1px;
-background: linear-gradient(to bottom, var(–gold) 0%, rgba(212,168,67,0.1) 100%);
-z-index: 0;
+.pkg-tab {
+flex: 1;
+background: none;
+border: none;
+color: var(–c-dim2);
+font-family: ‘Outfit’, sans-serif;
+font-size: 0.72rem;
+font-weight: 600;
+padding: 9px 6px;
+border-radius: 10px;
+cursor: pointer;
+transition: background 0.25s, color 0.25s;
+text-align: center;
+line-height: 1.3;
+-webkit-appearance: none;
+}
+.pkg-tab.active {
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
+color: var(–c-bg);
 }
 
-.f-step {
-display: flex;
-gap: 18px;
-padding: 0 0 28px 0;
-position: relative;
-z-index: 1;
-}
-.f-step:last-child { padding-bottom: 0; }
-
-.f-dot-wrap {
+/* –– Accordion list –– */
+.pkg-list {
 display: flex;
 flex-direction: column;
-align-items: center;
-flex-shrink: 0;
-}
-
-.f-dot {
-width: 32px; height: 32px;
-border-radius: 50%;
-background: var(–bg3);
-border: 2px solid rgba(212,168,67,0.3);
-display: flex;
-align-items: center;
-justify-content: center;
-font-family: ‘Fraunces’, serif;
-font-weight: 700;
-font-size: 0.8rem;
-color: var(–gold);
-position: relative;
-z-index: 1;
-transition: background 0.3s, border-color 0.3s;
-flex-shrink: 0;
-}
-
-.f-step.featured .f-dot {
-background: var(–gold);
-border-color: var(–gold);
-color: var(–bg);
-box-shadow: 0 0 20px rgba(212,168,67,0.4);
-}
-
-.f-body {
-flex: 1;
-background: var(–surface);
-border-radius: 16px;
-padding: 18px 18px;
-border: 1px solid var(–line);
-position: relative;
-overflow: hidden;
-transition: border-color 0.3s;
-}
-
-.f-step.featured .f-body {
-border-color: rgba(212,168,67,0.35);
-background: linear-gradient(135deg, rgba(212,168,67,0.07), rgba(212,168,67,0.02));
-}
-
-.f-badge {
-position: absolute;
-top: 12px; right: 12px;
-background: var(–red);
-color: #fff;
-font-size: 0.62rem;
-font-weight: 700;
-letter-spacing: 0.08em;
-text-transform: uppercase;
-padding: 3px 8px;
-border-radius: 100px;
-}
-
-.f-title {
-font-family: ‘Fraunces’, serif;
-font-size: 1rem;
-font-weight: 700;
-margin-bottom: 6px;
-padding-right: 60px;
-line-height: 1.3;
-}
-
-.f-desc {
-font-size: 0.82rem;
-color: var(–muted2);
-line-height: 1.65;
-margin-bottom: 14px;
-}
-
-.f-price-row {
-display: flex;
-align-items: baseline;
 gap: 10px;
 }
 
-.f-old {
-font-size: 0.78rem;
-color: var(–muted);
-text-decoration: line-through;
+.pkg-item {
+border-radius: var(–r-lg);
+overflow: hidden;
+border: 1px solid var(–c-line2);
+background: var(–c-surf);
+transition: border-color 0.3s;
 }
 
-.f-new {
-font-family: ‘Fraunces’, serif;
-font-size: 1.3rem;
+.pkg-item.is-hot {
+border-color: rgba(200,150,60,0.4);
+background: linear-gradient(160deg, rgba(200,150,60,0.07) 0%, var(–c-surf) 50%);
+}
+
+.pkg-item.is-open {
+border-color: rgba(200,150,60,0.45);
+}
+
+/* –– Header (always visible) –– */
+.pkg-head {
+width: 100%;
+background: none;
+border: none;
+cursor: pointer;
+padding: 18px 16px;
+display: flex;
+align-items: center;
+gap: 12px;
+text-align: left;
+-webkit-appearance: none;
+}
+
+.pkg-head-left { flex: 1; min-width: 0; }
+
+.pkg-emoji {
+font-size: 1.35rem;
+flex-shrink: 0;
+width: 42px;
+height: 42px;
+background: var(–c-gold3);
+border: 1px solid rgba(200,150,60,0.2);
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.pkg-name {
+font-family: ‘Cormorant Garamond’, serif;
 font-weight: 700;
-background: linear-gradient(135deg, var(–gold), var(–gold2));
+font-size: 1.05rem;
+color: var(–c-white);
+line-height: 1.2;
+margin-bottom: 4px;
+}
+
+.pkg-tagline {
+font-size: 0.74rem;
+color: var(–c-dim2);
+line-height: 1.3;
+}
+
+.pkg-head-right {
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: 4px;
+flex-shrink: 0;
+}
+
+.pkg-price-main {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 700;
+font-size: 1.3rem;
+line-height: 1;
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 }
 
-.f-free {
-font-family: ‘Fraunces’, serif;
-font-size: 1.3rem;
+.pkg-price-free {
+font-family: ‘Cormorant Garamond’, serif;
 font-weight: 700;
-color: var(–red);
+font-size: 1.3rem;
+line-height: 1;
+color: var(–c-red);
 }
 
-.f-tags {
+.pkg-price-old {
+font-size: 0.7rem;
+color: var(–c-dim);
+text-decoration: line-through;
+}
+
+.pkg-badges {
+display: flex;
+gap: 4px;
+align-items: center;
+}
+
+.badge-hot {
+background: var(–c-red);
+color: #fff;
+font-size: 0.56rem;
+font-weight: 700;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+padding: 2px 7px;
+border-radius: 100px;
+}
+
+.badge-best {
+background: rgba(200,150,60,0.15);
+color: var(–c-gold2);
+font-size: 0.56rem;
+font-weight: 700;
+letter-spacing: 0.06em;
+padding: 2px 7px;
+border-radius: 100px;
+border: 1px solid rgba(200,150,60,0.3);
+}
+
+.pkg-chevron {
+color: var(–c-dim);
+font-size: 0.85rem;
+transition: transform 0.3s;
+flex-shrink: 0;
+margin-left: 4px;
+}
+.pkg-item.is-open .pkg-chevron { transform: rotate(180deg); color: var(–c-gold); }
+
+/* –– Body (accordion content) –– */
+.pkg-body {
+display: none;
+padding: 0 16px 20px;
+border-top: 1px solid var(–c-line);
+}
+.pkg-item.is-open .pkg-body { display: block; }
+
+/* quick info row */
+.pkg-meta {
+display: flex;
+gap: 0;
+margin: 16px 0 18px;
+background: var(–c-bg3);
+border: 1px solid var(–c-line);
+border-radius: var(–r-md);
+overflow: hidden;
+}
+
+.meta-cell {
+flex: 1;
+padding: 10px 8px;
+text-align: center;
+border-right: 1px solid var(–c-line);
+}
+.meta-cell:last-child { border-right: none; }
+
+.meta-val {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 700;
+font-size: 1rem;
+color: var(–c-gold2);
+line-height: 1;
+margin-bottom: 4px;
+}
+
+.meta-lbl {
+font-size: 0.62rem;
+color: var(–c-dim);
+letter-spacing: 0.05em;
+text-transform: uppercase;
+font-weight: 500;
+}
+
+/* checklist */
+.pkg-section-title {
+font-size: 0.68rem;
+font-weight: 700;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–c-gold);
+margin-bottom: 10px;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.pkg-section-title::before {
+content: ‘’;
+width: 14px;
+height: 1px;
+background: var(–c-gold);
+flex-shrink: 0;
+}
+
+.checklist {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-bottom: 18px;
+}
+
+.check-item {
+display: flex;
+align-items: flex-start;
+gap: 10px;
+font-size: 0.83rem;
+color: var(–c-white);
+line-height: 1.5;
+}
+
+.check-icon {
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: rgba(200,150,60,0.15);
+border: 1px solid rgba(200,150,60,0.3);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.6rem;
+color: var(–c-gold2);
+flex-shrink: 0;
+margin-top: 1px;
+}
+
+.check-icon.no {
+background: rgba(255,255,255,0.04);
+border-color: var(–c-line);
+color: var(–c-dim);
+}
+
+.check-item.dimmed { color: var(–c-dim2); }
+
+/* tech stack */
+.tech-row {
 display: flex;
 flex-wrap: wrap;
 gap: 6px;
-margin-top: 12px;
+margin-bottom: 18px;
 }
-.f-tag {
+
+.tech-chip {
 font-size: 0.68rem;
-letter-spacing: 0.05em;
-border: 1px solid var(–line);
-padding: 3px 10px;
+font-weight: 600;
+padding: 4px 11px;
 border-radius: 100px;
-color: var(–muted2);
+background: var(–c-bg3);
+border: 1px solid var(–c-line2);
+color: var(–c-dim2);
+}
+
+/* warranty */
+.warranty-box {
+background: var(–c-bg3);
+border: 1px solid rgba(200,150,60,0.2);
+border-radius: var(–r-md);
+padding: 14px 14px;
+margin-bottom: 18px;
+display: flex;
+gap: 12px;
+align-items: flex-start;
+}
+
+.warranty-ico {
+font-size: 1.3rem;
+flex-shrink: 0;
+margin-top: 1px;
+}
+
+.warranty-text {
+font-size: 0.81rem;
+color: var(–c-dim2);
+line-height: 1.65;
+}
+
+.warranty-text strong {
+color: var(–c-gold2);
+font-weight: 600;
+}
+
+/* CTA inside accordion */
+.pkg-cta {
+display: flex;
+gap: 8px;
+}
+
+.pkg-cta-call {
+flex: 1;
+}
+
+.pkg-cta-zalo {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 50px;
+height: 50px;
+border-radius: var(–r-md);
+background: var(–c-zalo);
+font-size: 1.2rem;
+text-decoration: none;
+flex-shrink: 0;
+transition: transform 0.15s;
+}
+.pkg-cta-zalo:active { transform: scale(0.94); }
+
+/* –– Compare table –– */
+.compare-wrap {
+margin-top: 36px;
+}
+
+.compare-toggle {
+width: 100%;
+background: none;
+border: 1px solid var(–c-line2);
+color: var(–c-dim2);
+font-family: ‘Outfit’, sans-serif;
+font-size: 0.82rem;
+font-weight: 600;
+padding: 13px 18px;
+border-radius: var(–r-md);
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+transition: border-color 0.25s, color 0.25s;
+-webkit-appearance: none;
+}
+.compare-toggle:active { border-color: var(–c-gold); color: var(–c-gold); }
+
+.compare-table-wrap {
+display: none;
+margin-top: 16px;
+border: 1px solid var(–c-line2);
+border-radius: var(–r-lg);
+overflow: hidden;
+}
+.compare-table-wrap.show { display: block; }
+
+.cmp-table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.cmp-table th,
+.cmp-table td {
+padding: 10px 8px;
+font-size: 0.72rem;
+text-align: center;
+border-bottom: 1px solid var(–c-line);
+vertical-align: middle;
+}
+
+.cmp-table th {
+font-weight: 700;
+background: var(–c-bg3);
+color: var(–c-dim2);
+font-size: 0.65rem;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+line-height: 1.3;
+}
+
+.cmp-table th.highlight {
+background: rgba(200,150,60,0.1);
+color: var(–c-gold2);
+}
+
+.cmp-table td:first-child {
+text-align: left;
+color: var(–c-dim2);
+font-size: 0.75rem;
+padding-left: 12px;
+}
+
+.cmp-table tr:last-child td { border-bottom: none; }
+
+.cmp-table tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+
+.cmp-yes { color: var(–c-gold); font-size: 0.9rem; }
+.cmp-no  { color: var(–c-dim);  font-size: 0.9rem; }
+.cmp-val { color: var(–c-white); font-weight: 600; font-size: 0.72rem; }
+.cmp-val-gold {
+font-weight: 700;
+font-size: 0.75rem;
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.cmp-table td.highlight-col {
+background: rgba(200,150,60,0.05);
 }
 
 .funnel-cta {
-margin-top: 36px;
+margin-top: 28px;
+display: flex;
+flex-direction: column;
+gap: 10px;
 }
 
-/* ============================================================
-PROCESS
-============================================================ */
-.process-section { background: var(–bg2); }
+.cta-note {
+text-align: center;
+font-size: 0.75rem;
+color: var(–c-dim);
+margin-top: 6px;
+}
 
-.process-cards {
+/* =====================================================
+PROCESS
+===================================================== */
+.process-bg { background: var(–c-bg2); }
+
+.steps-grid {
 display: grid;
 grid-template-columns: 1fr 1fr;
 gap: 12px;
-margin-top: 36px;
+margin-top: 32px;
 }
 
-.p-card {
-background: var(–bg3);
-border: 1px solid var(–line);
-border-radius: 16px;
-padding: 22px 18px;
+.step-card {
+background: var(–c-bg3);
+border: 1px solid var(–c-line);
+border-radius: var(–r-lg);
+padding: 20px 16px;
 position: relative;
 overflow: hidden;
-transition: border-color 0.3s;
+transition: border-color 0.25s;
 }
 
-.p-card::after {
-content: ‘’;
+.step-card:active { border-color: rgba(200,150,60,0.3); }
+
+.step-glow {
 position: absolute;
-inset: 0;
-background: linear-gradient(135deg, rgba(212,168,67,0.05), transparent);
-opacity: 0;
-transition: opacity 0.3s;
+top: 0; left: 0;
+width: 80px; height: 80px;
+background: radial-gradient(circle, rgba(200,150,60,0.08) 0%, transparent 70%);
+border-radius: 50%;
+pointer-events: none;
 }
-.p-card:active::after { opacity: 1; }
 
-.p-num {
-font-family: ‘Fraunces’, serif;
-font-weight: 900;
-font-size: 2.8rem;
+.step-n {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 700;
+font-size: 2.6rem;
 line-height: 1;
-color: rgba(212,168,67,0.12);
+color: rgba(200,150,60,0.10);
 position: absolute;
-top: 12px; right: 14px;
+top: 10px;
+right: 12px;
 }
 
-.p-icon {
-font-size: 1.4rem;
-margin-bottom: 14px;
-display: block;
-}
+.step-ico { font-size: 1.4rem; margin-bottom: 12px; display: block; }
 
-.p-card h4 {
-font-family: ‘Fraunces’, serif;
-font-size: 0.95rem;
+.step-card h4 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1rem;
 font-weight: 700;
 margin-bottom: 8px;
-line-height: 1.25;
+line-height: 1.2;
 }
 
-.p-card p {
-font-size: 0.78rem;
-color: var(–muted2);
+.step-card p {
+font-size: 0.77rem;
+color: var(–c-dim2);
 line-height: 1.6;
 }
 
-/* ============================================================
+/* =====================================================
 PORTFOLIO
-============================================================ */
-.portfolio-section { background: var(–bg); }
+===================================================== */
+.port-bg { background: var(–c-bg); }
 
-.port-scroll {
+.port-header { margin-bottom: 0; }
+
+.port-cards {
+margin-top: 28px;
 display: flex;
+flex-direction: column;
 gap: 14px;
-overflow-x: auto;
-padding: 36px 20px 8px;
-margin: 0 -20px;
-scroll-snap-type: x mandatory;
--webkit-overflow-scrolling: touch;
-scrollbar-width: none;
 }
-.port-scroll::-webkit-scrollbar { display: none; }
 
 .port-card {
-scroll-snap-align: start;
-flex-shrink: 0;
-width: 260px;
-border-radius: 18px;
+background: var(–c-surf);
+border: 1px solid var(–c-line);
+border-radius: var(–r-xl);
 overflow: hidden;
-background: var(–surface);
-border: 1px solid var(–line);
-position: relative;
 }
 
 .port-thumb {
-height: 180px;
-background: var(–bg3);
+height: 160px;
+background: var(–c-bg3);
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
 gap: 10px;
-font-size: 2.2rem;
 position: relative;
 overflow: hidden;
 }
 
-.port-thumb::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: linear-gradient(135deg, rgba(212,168,67,0.06), rgba(240,76,47,0.04));
-}
+.port-thumb-emoji { font-size: 2rem; position: relative; z-index: 1; }
 
-.port-thumb-label {
-font-size: 0.7rem;
-color: var(–muted);
-letter-spacing: 0.06em;
+.port-thumb-hint {
+font-size: 0.68rem;
+color: var(–c-dim);
+letter-spacing: 0.07em;
 text-transform: uppercase;
 font-weight: 500;
+position: relative;
+z-index: 1;
+}
+
+.port-thumb-shine {
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, rgba(200,150,60,0.05) 0%, rgba(232,77,42,0.04) 100%);
 }
 
 .port-cat {
 position: absolute;
-top: 12px; left: 12px;
-background: rgba(12,12,15,0.85);
-border: 1px solid rgba(212,168,67,0.3);
-color: var(–gold2);
-font-size: 0.65rem;
+top: 12px;
+left: 12px;
+background: rgba(8,8,16,0.80);
+border: 1px solid rgba(200,150,60,0.28);
+color: var(–c-gold2);
+font-size: 0.63rem;
 font-weight: 600;
-letter-spacing: 0.08em;
+letter-spacing: 0.09em;
 text-transform: uppercase;
 padding: 4px 10px;
 border-radius: 100px;
 backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
 }
 
-.port-info {
-padding: 16px 16px 20px;
+.port-body {
+padding: 16px 18px 20px;
 }
 
-.port-info h4 {
-font-family: ‘Fraunces’, serif;
-font-size: 0.95rem;
+.port-body h4 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.05rem;
 font-weight: 700;
-margin-bottom: 6px;
-line-height: 1.3;
+margin-bottom: 5px;
+line-height: 1.25;
 }
-.port-info p {
-font-size: 0.78rem;
-color: var(–muted2);
+
+.port-body p {
+font-size: 0.79rem;
+color: var(–c-dim2);
 line-height: 1.5;
 }
 
-.port-scroll-hint {
-text-align: center;
-margin-top: 16px;
-font-size: 0.75rem;
-color: var(–muted);
-letter-spacing: 0.06em;
-}
-
-/* ============================================================
+/* =====================================================
 TESTIMONIALS
-============================================================ */
-.testi-section { background: var(–bg2); }
+===================================================== */
+.testi-bg { background: var(–c-bg2); }
 
-.testi-scroll {
+.testi-cards {
 display: flex;
+flex-direction: column;
 gap: 14px;
-overflow-x: auto;
-padding: 36px 20px 8px;
-margin: 0 -20px;
-scroll-snap-type: x mandatory;
--webkit-overflow-scrolling: touch;
-scrollbar-width: none;
+margin-top: 28px;
 }
-.testi-scroll::-webkit-scrollbar { display: none; }
 
-.t-card {
-scroll-snap-align: start;
-flex-shrink: 0;
-width: calc(100vw - 56px);
-max-width: 360px;
-background: var(–bg3);
-border: 1px solid var(–line);
-border-radius: 20px;
-padding: 24px 22px;
+.testi-card {
+background: var(–c-bg3);
+border: 1px solid var(–c-line);
+border-radius: var(–r-xl);
+padding: 22px 20px;
 }
 
 .t-stars {
-color: var(–gold);
-font-size: 0.85rem;
+color: var(–c-gold);
 letter-spacing: 2px;
+font-size: 0.82rem;
 margin-bottom: 14px;
 }
 
-.t-quote {
-font-size: 0.9rem;
-line-height: 1.75;
-color: #ccc;
-margin-bottom: 20px;
-font-style: italic;
-}
-.t-quote::before {
-content: ‘”’;
-font-family: ‘Fraunces’, serif;
-font-size: 2.5rem;
-color: rgba(212,168,67,0.2);
+.t-big-quote {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 3rem;
+color: rgba(200,150,60,0.18);
+line-height: 0.7;
+margin-bottom: 10px;
 display: block;
-line-height: 0.8;
-margin-bottom: 8px;
+}
+
+.t-text {
+font-size: 0.88rem;
+color: #c5c0b8;
+line-height: 1.75;
+font-style: italic;
+margin-bottom: 18px;
 }
 
 .t-author {
@@ -841,187 +1171,257 @@ gap: 12px;
 }
 
 .t-ava {
-width: 40px; height: 40px;
+width: 42px;
+height: 42px;
 border-radius: 50%;
-background: linear-gradient(135deg, var(–gold), var(–red));
+background: linear-gradient(135deg, var(–c-gold), var(–c-red));
 display: flex;
 align-items: center;
 justify-content: center;
 font-weight: 700;
-font-size: 0.95rem;
-color: var(–bg);
+font-size: 1rem;
+color: #fff;
 flex-shrink: 0;
 }
 
 .t-name {
-font-weight: 600;
 font-size: 0.88rem;
+font-weight: 600;
 line-height: 1.2;
 margin-bottom: 3px;
 }
-.t-role {
-font-size: 0.73rem;
-color: var(–muted);
-}
+.t-role { font-size: 0.73rem; color: var(–c-dim); }
 
-/* ============================================================
+/* =====================================================
 FAQ
-============================================================ */
-.faq-section { background: var(–bg); }
+===================================================== */
+.faq-bg { background: var(–c-bg); }
 
 .faq-list {
-margin-top: 36px;
 display: flex;
 flex-direction: column;
 gap: 8px;
+margin-top: 32px;
 }
 
 .faq-item {
-background: var(–surface);
-border: 1px solid var(–line);
-border-radius: 14px;
+background: var(–c-surf);
+border: 1px solid var(–c-line);
+border-radius: var(–r-md);
 overflow: hidden;
 transition: border-color 0.3s;
 }
+.faq-item.open { border-color: rgba(200,150,60,0.28); }
 
-.faq-item.open {
-border-color: rgba(212,168,67,0.25);
-}
-
-.faq-btn {
+.faq-q {
 width: 100%;
 background: none;
 border: none;
-color: var(–white);
-text-align: left;
-font-family: ‘DM Sans’, sans-serif;
+color: var(–c-white);
+font-family: ‘Outfit’, sans-serif;
 font-size: 0.9rem;
 font-weight: 600;
 padding: 18px 18px;
-cursor: pointer;
+text-align: left;
 display: flex;
-align-items: center;
 justify-content: space-between;
-gap: 16px;
+align-items: flex-start;
+gap: 14px;
+cursor: pointer;
 line-height: 1.4;
+-webkit-appearance: none;
 }
 
-.faq-chevron {
-width: 28px; height: 28px;
+.faq-icon {
+width: 26px;
+height: 26px;
 border-radius: 50%;
-border: 1px solid var(–line);
+border: 1px solid var(–c-line2);
 display: flex;
 align-items: center;
 justify-content: center;
+font-size: 1rem;
+color: var(–c-dim);
 flex-shrink: 0;
-transition: transform 0.3s, background 0.3s, border-color 0.3s;
-color: var(–muted);
+transition: transform 0.3s, background 0.3s, color 0.3s;
+margin-top: 1px;
 }
 
-.faq-item.open .faq-chevron {
+.faq-item.open .faq-icon {
 transform: rotate(45deg);
-background: var(–gold);
-border-color: var(–gold);
-color: var(–bg);
+background: var(–c-gold);
+color: var(–c-bg);
+border-color: var(–c-gold);
 }
 
-.faq-answer {
+.faq-a {
 display: none;
 padding: 0 18px 18px;
-font-size: 0.85rem;
-color: var(–muted2);
-line-height: 1.75;
+font-size: 0.84rem;
+color: var(–c-dim2);
+line-height: 1.78;
 }
-.faq-item.open .faq-answer { display: block; }
+.faq-item.open .faq-a { display: block; }
 
-/* ============================================================
-CTA SECTION
-============================================================ */
-.cta-section {
-background: var(–bg2);
+/* =====================================================
+CTA BAND
+===================================================== */
+.cta-bg {
+background: var(–c-bg2);
 text-align: center;
 padding: 80px 0;
 position: relative;
 overflow: hidden;
 }
 
-.cta-section::before {
-content: ‘’;
+.cta-halo {
 position: absolute;
-width: 300px; height: 300px;
-border-radius: 50%;
-top: -100px; left: 50%;
+top: -80px;
+left: 50%;
 transform: translateX(-50%);
-background: radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 70%);
+width: 280px;
+height: 280px;
+background: radial-gradient(circle, rgba(200,150,60,0.10) 0%, transparent 70%);
+border-radius: 50%;
 pointer-events: none;
 }
 
-.cta-section .label { justify-content: center; }
-.cta-section .label::before { display: none; }
+.cta-label { justify-content: center; }
+.cta-label::before { display: none; }
 
 .cta-sub {
 font-size: 0.88rem;
-color: var(–muted2);
+color: var(–c-dim2);
 line-height: 1.75;
-margin: 16px 0 36px;
+margin: 14px 0 32px;
 }
 
 .cta-btns {
 display: flex;
 flex-direction: column;
-gap: 12px;
-}
-
-.btn-zalo {
-display: flex;
-align-items: center;
-justify-content: center;
 gap: 10px;
-background: #0068ff;
-color: #fff;
-font-weight: 700;
-font-size: 0.95rem;
-padding: 17px 24px;
-border-radius: 14px;
-text-decoration: none;
-box-shadow: 0 8px 32px rgba(0,104,255,0.25);
-transition: transform 0.2s;
 }
-.btn-zalo:active { transform: scale(0.97); }
 
-.cta-trust {
+.trust-row {
 display: flex;
 justify-content: center;
-gap: 28px;
+gap: 0;
 margin-top: 36px;
-flex-wrap: wrap;
+flex-wrap: nowrap;
 }
 
 .trust-item {
+flex: 1;
 display: flex;
 flex-direction: column;
 align-items: center;
 gap: 6px;
-font-size: 0.72rem;
-color: var(–muted2);
-letter-spacing: 0.04em;
-text-transform: uppercase;
+padding: 0 6px;
+}
+
+.trust-ico { font-size: 1.3rem; }
+
+.trust-txt {
+font-size: 0.67rem;
+color: var(–c-dim2);
+letter-spacing: 0.03em;
+text-align: center;
+line-height: 1.4;
 font-weight: 500;
 }
-.trust-item span:first-child { font-size: 1.4rem; }
 
-/* ============================================================
-FLOATING CTA
-============================================================ */
-.float-cta {
+/* =====================================================
+FOOTER
+===================================================== */
+.site-footer {
+background: #04040a;
+padding: 44px var(–sp-page) 24px;
+border-top: 1px solid var(–c-line);
+}
+
+.footer-logo {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 700;
+font-size: 1.55rem;
+letter-spacing: -0.02em;
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: block;
+margin-bottom: 10px;
+}
+
+.footer-logo-dot {
+color: var(–c-red);
+-webkit-text-fill-color: var(–c-red);
+}
+
+.footer-desc {
+font-size: 0.84rem;
+color: var(–c-dim2);
+line-height: 1.7;
+margin-bottom: 28px;
+}
+
+.footer-cols {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 28px;
+margin-bottom: 32px;
+}
+
+.footer-col h5 {
+font-size: 0.67rem;
+font-weight: 700;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(–c-gold);
+margin-bottom: 14px;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+
+.footer-col a {
+color: var(–c-dim2);
+text-decoration: none;
+font-size: 0.84rem;
+transition: color 0.2s;
+}
+.footer-col a:active { color: var(–c-white); }
+
+.footer-hr {
+height: 1px;
+background: var(–c-line);
+margin-bottom: 20px;
+}
+
+.footer-copy {
+text-align: center;
+font-size: 0.73rem;
+color: var(–c-dim);
+line-height: 1.7;
+}
+
+/* =====================================================
+FLOAT BAR
+===================================================== */
+.float-bar {
 position: fixed;
-bottom: calc(var(–safe-bot) + 16px);
-left: 16px; right: 16px;
+left: var(–sp-page);
+right: var(–sp-page);
+bottom: 16px;
 z-index: 800;
 display: flex;
 gap: 10px;
-max-width: 480px;
-margin: 0 auto;
+transition: opacity 0.3s, transform 0.3s;
+}
+
+.float-bar.hidden {
+opacity: 0;
+transform: translateY(10px);
+pointer-events: none;
 }
 
 .float-btn {
@@ -1030,205 +1430,138 @@ display: flex;
 align-items: center;
 justify-content: center;
 gap: 8px;
-padding: 16px 12px;
-border-radius: 14px;
+padding: 15px 10px;
+border-radius: var(–r-md);
+font-family: ‘Outfit’, sans-serif;
 font-weight: 700;
-font-size: 0.88rem;
+font-size: 0.86rem;
 text-decoration: none;
 border: none;
 cursor: pointer;
-box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+box-shadow: 0 6px 28px rgba(0,0,0,0.45);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
 transition: transform 0.15s;
-backdrop-filter: blur(12px);
--webkit-backdrop-filter: blur(12px);
+-webkit-appearance: none;
 }
 .float-btn:active { transform: scale(0.96); }
 
 .float-call {
-background: linear-gradient(135deg, var(–gold), var(–gold2));
-color: var(–bg);
-box-shadow: 0 8px 28px rgba(212,168,67,0.35);
+background: linear-gradient(135deg, var(–c-gold), var(–c-gold2));
+color: var(–c-bg);
+box-shadow: 0 6px 24px rgba(200,150,60,0.35);
 }
-.float-zalo {
-background: #0068ff;
+
+.float-zalo-btn {
+background: var(–c-zalo);
 color: #fff;
-box-shadow: 0 8px 28px rgba(0,104,255,0.3);
+box-shadow: 0 6px 24px rgba(0,104,255,0.30);
 }
 
 .float-ava {
-width: 28px; height: 28px;
+width: 27px;
+height: 27px;
 border-radius: 50%;
 background: rgba(0,0,0,0.15);
+border: 2px solid rgba(255,255,255,0.22);
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 0.9rem;
-border: 2px solid rgba(255,255,255,0.25);
+font-size: 0.85rem;
+flex-shrink: 0;
 }
 
-.float-text { line-height: 1; }
-.float-text small { display: block; font-size: 0.65rem; font-weight: 400; opacity: 0.75; margin-top: 2px; }
-
-/* padding so content not hidden by float btns */
-.float-spacer { height: calc(var(–safe-bot) + 90px); }
-
-/* ============================================================
-FOOTER
-============================================================ */
-footer {
-background: #060608;
-padding: 48px 20px 24px;
-border-top: 1px solid var(–line);
-}
-
-.footer-logo {
-font-family: ‘Fraunces’, serif;
-font-weight: 900;
-font-size: 1.6rem;
-letter-spacing: -0.03em;
-background: linear-gradient(135deg, var(–gold), var(–gold2));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
+.float-label { line-height: 1; }
+.float-label small {
 display: block;
-margin-bottom: 10px;
+font-size: 0.62rem;
+font-weight: 400;
+opacity: 0.72;
+margin-top: 2px;
 }
 
-.footer-desc {
-font-size: 0.85rem;
-color: var(–muted2);
-line-height: 1.7;
-margin-bottom: 28px;
-}
+/* spacer so float bar doesn’t hide content */
+.float-spacer { height: 82px; }
 
-.footer-links {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 32px;
-margin-bottom: 36px;
-}
-
-.fl-group h5 {
-font-size: 0.7rem;
-font-weight: 700;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-color: var(–gold);
-margin-bottom: 14px;
-}
-
-.fl-group ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.fl-group a {
-color: var(–muted2);
-text-decoration: none;
-font-size: 0.85rem;
-transition: color 0.2s;
-}
-.fl-group a:active { color: var(–white); }
-
-.footer-divider {
-height: 1px;
-background: var(–line);
-margin-bottom: 24px;
-}
-
-.footer-bottom {
-display: flex;
-flex-direction: column;
-gap: 8px;
-align-items: center;
-text-align: center;
-}
-
-.footer-bottom p {
-font-size: 0.75rem;
-color: var(–muted);
-line-height: 1.6;
-}
-
-/* ============================================================
+/* =====================================================
 SCROLL REVEAL
-============================================================ */
+===================================================== */
 .sr {
 opacity: 0;
-transform: translateY(32px);
-transition: opacity 0.65s ease, transform 0.65s ease;
+transform: translateY(28px);
+transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.sr.visible {
+.sr.on {
 opacity: 1;
 transform: translateY(0);
 }
+.sr.d1 { transition-delay: 0.08s; }
+.sr.d2 { transition-delay: 0.16s; }
+.sr.d3 { transition-delay: 0.24s; }
 
-.sr-delay-1 { transition-delay: 0.1s; }
-.sr-delay-2 { transition-delay: 0.2s; }
-.sr-delay-3 { transition-delay: 0.3s; }
-
-/* ============================================================
-UTILS
-============================================================ */
-.mt-8  { margin-top: 8px; }
-.mt-16 { margin-top: 16px; }
-.mt-24 { margin-top: 24px; }
-.mt-36 { margin-top: 36px; }
-.mb-8  { margin-bottom: 8px; }
-/* khoá toàn trang */
-
+/* =====================================================
+SAFE AREA SUPPORT
+===================================================== */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+.float-bar { bottom: calc(env(safe-area-inset-bottom) + 14px); }
+.float-spacer { height: calc(env(safe-area-inset-bottom) + 82px); }
+.hero { padding-top: calc(env(safe-area-inset-top) + 80px); }
+.navbar-inner { padding-top: calc(env(safe-area-inset-top) + 12px); }
+}
 </style>
 
 </head>
 <body>
 
-<!-- ═══════════════ NAVBAR ═══════════════ -->
+<!-- ──────── NAVBAR ──────── -->
 
-<nav class="navbar">
-  <div class="logo">Pixel<span>Forge</span></div>
-  <a href="tel:0373453757" class="nav-call">
-    📞 Gọi Ngay
-  </a>
-</nav>
+<header class="navbar">
+  <div class="navbar-inner">
+    <div class="logo">Pixel<span class="logo-dot">.</span>Forge</div>
+    <a href="tel:0373453757" class="nav-btn">📞 Gọi Ngay</a>
+  </div>
+</header>
 
-<!-- ═══════════════ HERO ═══════════════ -->
+<!-- ──────── HERO ──────── -->
 
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-orb"></div>
-  <div class="container">
+  <div class="hero-glow-top"></div>
+  <div class="hero-glow-bot"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content wrap">
     <div class="hero-badge">
-      <span class="badge-dot"></span>
+      <span class="live-dot"></span>
       PixelForge Studio · Hà Nội
     </div>
 
 ```
-<div class="hero-title display display-lg">
-  Biến <em class="italic gold-text">Ý Tưởng</em><br>Thành Web<br>Đỉnh Cao
-</div>
+<h1 class="hero-title font-display text-xl">
+  Biến <em class="text-gold">Ý Tưởng</em><br>
+  Thành Website<br>
+  Đỉnh Cao
+</h1>
 
-<p class="hero-desc mt-16">
-  Thiết kế website chuẩn SEO, tốc độ cao, giao diện độc bản – giúp doanh nghiệp bứt phá doanh thu từ kênh online.
+<p class="hero-desc">
+  Thiết kế website chuẩn SEO, tốc độ cao, giao diện độc bản - giúp doanh nghiệp bứt phá doanh thu từ kênh online.
 </p>
 
-<div class="hero-btns">
-  <a href="#funnel" class="btn-gold">
-    🔥 Xem Bảng Giá
-  </a>
-  <a href="#portfolio" class="btn-outline">
-    ✨ Xem Portfolio
-  </a>
+<div class="hero-ctas">
+  <a href="#funnel" class="btn btn-primary">🔥 Xem Bảng Giá</a>
+  <a href="#portfolio" class="btn btn-ghost">✨ Xem Portfolio</a>
 </div>
 
 <div class="hero-stats">
-  <div class="stat">
-    <div class="stat-n" data-count="150" data-suffix="+">0</div>
-    <div class="stat-l">Dự Án</div>
+  <div class="stat-cell">
+    <div class="stat-num" data-target="150" data-suffix="+">0+</div>
+    <div class="stat-lbl">Dự Án</div>
   </div>
-  <div class="stat">
-    <div class="stat-n" data-count="98" data-suffix="%">0</div>
-    <div class="stat-l">Hài Lòng</div>
+  <div class="stat-cell">
+    <div class="stat-num" data-target="98" data-suffix="%">0%</div>
+    <div class="stat-lbl">Hài Lòng</div>
   </div>
-  <div class="stat">
-    <div class="stat-n" data-count="5" data-suffix="+">0</div>
-    <div class="stat-l">Năm KN</div>
+  <div class="stat-cell">
+    <div class="stat-num" data-target="5" data-suffix="+">0+</div>
+    <div class="stat-lbl">Năm KN</div>
   </div>
 </div>
 ```
@@ -1236,83 +1569,83 @@ UTILS
   </div>
 </section>
 
-<!-- ═══════════════ MARQUEE ═══════════════ -->
+<!-- ──────── MARQUEE ──────── -->
 
-<div class="marquee-wrap">
-  <div class="marquee-inner">
-    <div class="m-item">Landing Page</div>
-    <div class="m-item">Web Doanh Nghiệp</div>
-    <div class="m-item">E-commerce</div>
-    <div class="m-item">Chuẩn SEO</div>
-    <div class="m-item">Tốc Độ Cao</div>
-    <div class="m-item">Mobile First</div>
-    <div class="m-item">Bảo Hành 12T</div>
-    <div class="m-item">UI/UX Cao Cấp</div>
-    <div class="m-item">Landing Page</div>
-    <div class="m-item">Web Doanh Nghiệp</div>
-    <div class="m-item">E-commerce</div>
-    <div class="m-item">Chuẩn SEO</div>
-    <div class="m-item">Tốc Độ Cao</div>
-    <div class="m-item">Mobile First</div>
-    <div class="m-item">Bảo Hành 12T</div>
-    <div class="m-item">UI/UX Cao Cấp</div>
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Landing Page</span>
+    <span class="marquee-item">Web Doanh Nghiệp</span>
+    <span class="marquee-item">E-Commerce</span>
+    <span class="marquee-item">Chuẩn SEO</span>
+    <span class="marquee-item">Tốc Độ Cao</span>
+    <span class="marquee-item">Mobile First</span>
+    <span class="marquee-item">Bảo Hành 12T</span>
+    <span class="marquee-item">UI/UX Cao Cấp</span>
+    <span class="marquee-item">Landing Page</span>
+    <span class="marquee-item">Web Doanh Nghiệp</span>
+    <span class="marquee-item">E-Commerce</span>
+    <span class="marquee-item">Chuẩn SEO</span>
+    <span class="marquee-item">Tốc Độ Cao</span>
+    <span class="marquee-item">Mobile First</span>
+    <span class="marquee-item">Bảo Hành 12T</span>
+    <span class="marquee-item">UI/UX Cao Cấp</span>
   </div>
 </div>
 
-<!-- ═══════════════ SERVICES ═══════════════ -->
+<!-- ──────── SERVICES ──────── -->
 
-<section class="services-section" id="services">
-  <div class="container">
-    <div class="label sr">Dịch Vụ</div>
-    <div class="display display-md mt-8 sr sr-delay-1">Chúng Tôi<br>Làm <em class="italic gold-text">Gì?</em></div>
+<section class="services-bg" id="services">
+  <div class="wrap">
+    <div class="sec-label sr">Dịch Vụ</div>
+    <h2 class="font-display text-lg sr d1">Chúng Tôi<br>Làm <em class="text-gold">Gì?</em></h2>
 
 ```
-<div class="services-cards mt-36 sr sr-delay-2">
-  <div class="svc-card">
-    <div class="svc-icon">🎨</div>
-    <div class="svc-body">
+<div class="svc-list sr d2">
+  <div class="svc-row">
+    <div class="svc-ico">🎨</div>
+    <div class="svc-text">
       <h3>Thiết Kế UI/UX Độc Bản</h3>
-      <p>Không template, thiết kế riêng theo thương hiệu – đẹp và khác biệt.</p>
+      <p>Không template, giao diện riêng theo thương hiệu - đẹp và khác biệt.</p>
     </div>
     <div class="svc-arrow">›</div>
   </div>
-  <div class="svc-card">
-    <div class="svc-icon">⚡</div>
-    <div class="svc-body">
+  <div class="svc-row">
+    <div class="svc-ico">⚡</div>
+    <div class="svc-text">
       <h3>Lập Trình Tốc Độ Cao</h3>
       <p>PageSpeed 90+, tải dưới 2 giây, mượt trên mọi thiết bị.</p>
     </div>
     <div class="svc-arrow">›</div>
   </div>
-  <div class="svc-card">
-    <div class="svc-icon">🔍</div>
-    <div class="svc-body">
+  <div class="svc-row">
+    <div class="svc-ico">🔍</div>
+    <div class="svc-text">
       <h3>SEO Kỹ Thuật Chuẩn</h3>
-      <p>Schema, sitemap, meta, Core Web Vitals tối ưu ngay từ đầu.</p>
+      <p>Schema, sitemap, meta, Core Web Vitals tối ưu từ đầu.</p>
     </div>
     <div class="svc-arrow">›</div>
   </div>
-  <div class="svc-card">
-    <div class="svc-icon">🛒</div>
-    <div class="svc-body">
-      <h3>Web Bán Hàng & E-Commerce</h3>
-      <p>Giỏ hàng, thanh toán VNPay/Momo, quản lý đơn hàng đầy đủ.</p>
+  <div class="svc-row">
+    <div class="svc-ico">🛒</div>
+    <div class="svc-text">
+      <h3>Web Bán Hàng &amp; E-Commerce</h3>
+      <p>Giỏ hàng, thanh toán VNPay/Momo, quản lý đơn đầy đủ.</p>
     </div>
     <div class="svc-arrow">›</div>
   </div>
-  <div class="svc-card">
-    <div class="svc-icon">🔒</div>
-    <div class="svc-body">
-      <h3>Hosting & Bảo Mật</h3>
+  <div class="svc-row">
+    <div class="svc-ico">🔒</div>
+    <div class="svc-text">
+      <h3>Hosting &amp; Bảo Mật</h3>
       <p>SSL, backup tự động, giám sát uptime 24/7, vá lỗi định kỳ.</p>
     </div>
     <div class="svc-arrow">›</div>
   </div>
-  <div class="svc-card">
-    <div class="svc-icon">🔄</div>
-    <div class="svc-body">
-      <h3>Bảo Trì & Nâng Cấp</h3>
-      <p>Hỗ trợ sau bàn giao, thêm tính năng, cập nhật nội dung dài hạn.</p>
+  <div class="svc-row">
+    <div class="svc-ico">🔄</div>
+    <div class="svc-text">
+      <h3>Bảo Trì &amp; Nâng Cấp</h3>
+      <p>Hỗ trợ sau bàn giao, thêm tính năng, cập nhật lâu dài.</p>
     </div>
     <div class="svc-arrow">›</div>
   </div>
@@ -1322,155 +1655,548 @@ UTILS
   </div>
 </section>
 
-<!-- ═══════════════ FUNNEL ═══════════════ -->
+<!-- ──────── FUNNEL ──────── -->
 
-<section class="funnel-section" id="funnel">
-  <div class="container">
-    <div class="label sr">Phễu Sản Phẩm</div>
-    <div class="display display-md mt-8 sr sr-delay-1">Gói <em class="italic gold-text">Giá</em><br>Phù Hợp Bạn</div>
-    <p class="funnel-intro sr sr-delay-2">Bắt đầu từ tư vấn miễn phí, nâng cấp khi sẵn sàng. Giá rõ ràng, không phí ẩn.</p>
+<section class="funnel-bg" id="funnel">
+  <div class="wrap">
+    <div class="sec-label sr">Bang Gia Chi Tiet</div>
+    <h2 class="font-display text-lg sr d1">Chon Goi<br><em class="text-gold">Phu Hop Ban</em></h2>
+    <p class="funnel-note sr d2">Bam vao tung goi de xem day du tinh nang, thoi gian ban giao va chinh sach bao hanh. Khong phi an, khong rang buoc.</p>
 
 ```
-<div class="funnel-steps mt-36">
-  <div class="funnel-line"></div>
+<!-- Tab filter -->
+<div class="pkg-tabs sr d2">
+  <button class="pkg-tab active" onclick="filterPkg('all',this)">Tat Ca</button>
+  <button class="pkg-tab" onclick="filterPkg('basic',this)">Co Ban</button>
+  <button class="pkg-tab" onclick="filterPkg('pro',this)">Pro</button>
+  <button class="pkg-tab" onclick="filterPkg('ecom',this)">Shop</button>
+</div>
 
-  <div class="f-step sr">
-    <div class="f-dot-wrap">
-      <div class="f-dot">1</div>
-    </div>
-    <div class="f-body">
-      <div class="f-title">🎁 Tư Vấn & Audit Miễn Phí</div>
-      <div class="f-desc">Phân tích website hiện tại, đề xuất giải pháp, báo giá chi tiết. Không ràng buộc.</div>
-      <div class="f-price-row">
-        <span class="f-free">0 ₫</span>
+<div class="pkg-list sr d3">
+
+  <!-- GOI 1: Tu van -->
+  <div class="pkg-item" data-cat="basic">
+    <button class="pkg-head" onclick="togglePkg(this)">
+      <div class="pkg-emoji">🎁</div>
+      <div class="pkg-head-left">
+        <div class="pkg-name">Tu Van &amp; Audit</div>
+        <div class="pkg-tagline">Phan tich + bao gia mien phi</div>
       </div>
-      <div class="f-tags">
-        <span class="f-tag">1-1 Tư Vấn</span>
-        <span class="f-tag">Zalo / Call</span>
+      <div class="pkg-head-right">
+        <div class="pkg-price-free">0 d</div>
+        <div class="pkg-price-old">&nbsp;</div>
+      </div>
+      <span class="pkg-chevron">▼</span>
+    </button>
+    <div class="pkg-body">
+      <div class="pkg-meta">
+        <div class="meta-cell">
+          <div class="meta-val">0 d</div>
+          <div class="meta-lbl">Chi phi</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">30ph</div>
+          <div class="meta-lbl">Phan hoi</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">Khong</div>
+          <div class="meta-lbl">Rang buoc</div>
+        </div>
+      </div>
+
+      <div class="pkg-section-title">Bao Gom</div>
+      <ul class="checklist">
+        <li class="check-item"><span class="check-icon">✓</span>Phan tich website hien tai (neu co)</li>
+        <li class="check-item"><span class="check-icon">✓</span>Kiem tra toc do, SEO, UI/UX hien trang</li>
+        <li class="check-item"><span class="check-icon">✓</span>De xuat giai phap phu hop ngan sach</li>
+        <li class="check-item"><span class="check-icon">✓</span>Bao gia chi tiet tung hang muc</li>
+        <li class="check-item"><span class="check-icon">✓</span>Tu van via Zalo / Call / Gap truc tiep</li>
+        <li class="check-item"><span class="check-icon">✓</span>Khong rang buoc - khong can dat co</li>
+      </ul>
+
+      <div class="warranty-box">
+        <span class="warranty-ico">💬</span>
+        <div class="warranty-text">
+          <strong>Phan hoi trong 30 phut</strong> qua Zalo trong gio hanh chinh (T2-T7, 8h-18h). Ngoai gio phan hoi trong ngay lam viec tiep theo.
+        </div>
+      </div>
+
+      <div class="pkg-cta">
+        <a href="tel:0373453757" class="btn btn-primary pkg-cta-call">📞 Goi Tu Van Ngay</a>
+        <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="pkg-cta-zalo">💬</a>
       </div>
     </div>
   </div>
 
-  <div class="f-step sr sr-delay-1">
-    <div class="f-dot-wrap">
-      <div class="f-dot">2</div>
-    </div>
-    <div class="f-body">
-      <div class="f-title">🚀 Landing Page Cơ Bản</div>
-      <div class="f-desc">1 trang tối ưu chuyển đổi, form đăng ký, Google Analytics. Bàn giao 3 ngày.</div>
-      <div class="f-price-row">
-        <span class="f-old">2.500.000 ₫</span>
-        <span class="f-new">1.500.000 ₫</span>
+  <!-- GOI 2: Landing Page -->
+  <div class="pkg-item" data-cat="basic">
+    <button class="pkg-head" onclick="togglePkg(this)">
+      <div class="pkg-emoji">🚀</div>
+      <div class="pkg-head-left">
+        <div class="pkg-name">Landing Page Co Ban</div>
+        <div class="pkg-tagline">1 trang ban hang toi uu chuyen doi</div>
       </div>
-      <div class="f-tags">
-        <span class="f-tag">Responsive</span>
-        <span class="f-tag">3 Ngày</span>
+      <div class="pkg-head-right">
+        <div class="pkg-badges"><span class="badge-best">SALE</span></div>
+        <div class="pkg-price-main">1.500.000 d</div>
+        <div class="pkg-price-old">2.500.000 d</div>
+      </div>
+      <span class="pkg-chevron">▼</span>
+    </button>
+    <div class="pkg-body">
+      <div class="pkg-meta">
+        <div class="meta-cell">
+          <div class="meta-val">1</div>
+          <div class="meta-lbl">So trang</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">3-5</div>
+          <div class="meta-lbl">Ngay BG</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">3 th</div>
+          <div class="meta-lbl">Bao hanh</div>
+        </div>
+      </div>
+
+      <div class="pkg-section-title">Tinh Nang Chinh</div>
+      <ul class="checklist">
+        <li class="check-item"><span class="check-icon">✓</span>Thiet ke giao dien rieng theo brand (khong template)</li>
+        <li class="check-item"><span class="check-icon">✓</span>1 trang landing page day du section: Hero, Dich vu, Testimonial, CTA</li>
+        <li class="check-item"><span class="check-icon">✓</span>Form dang ky / lien he tich hop email thong bao</li>
+        <li class="check-item"><span class="check-icon">✓</span>Responsive chuan mobile, tablet, desktop</li>
+        <li class="check-item"><span class="check-icon">✓</span>Nut bam Zalo / Hotline float tren man hinh</li>
+        <li class="check-item"><span class="check-icon">✓</span>Tich hop Google Analytics 4 theo doi traffic</li>
+        <li class="check-item"><span class="check-icon">✓</span>Facebook Pixel (neu co tai khoan ads)</li>
+        <li class="check-item"><span class="check-icon">✓</span>Toc do tai trang duoi 2 giay</li>
+        <li class="check-item"><span class="check-icon">✓</span>SSL (HTTPS) bao mat</li>
+        <li class="check-item check-item dimmed"><span class="check-icon no">✗</span>He thong quan tri noi dung (CMS)</li>
+        <li class="check-item check-item dimmed"><span class="check-icon no">✗</span>Blog / bai viet SEO</li>
+        <li class="check-item check-item dimmed"><span class="check-icon no">✗</span>Nhieu trang noi dung</li>
+      </ul>
+
+      <div class="pkg-section-title">Cong Nghe</div>
+      <div class="tech-row">
+        <span class="tech-chip">HTML/CSS/JS</span>
+        <span class="tech-chip">WordPress</span>
+        <span class="tech-chip">Elementor Pro</span>
+        <span class="tech-chip">Google Analytics</span>
+        <span class="tech-chip">Zalo API</span>
+      </div>
+
+      <div class="pkg-section-title">Chinh Sach Bao Hanh</div>
+      <div class="warranty-box">
+        <span class="warranty-ico">🛡️</span>
+        <div class="warranty-text">
+          <strong>Bao hanh 3 thang:</strong> Sua loi phat sinh mien phi. Cap nhat nho noi dung (text, hinh). Ho tro ky thuat qua Zalo trong gio hanh chinh. Sau 3 thang: phi bao tri 200.000d/thang.
+        </div>
+      </div>
+
+      <div class="pkg-cta">
+        <a href="tel:0373453757" class="btn btn-primary pkg-cta-call">📞 Dat Goi Nay</a>
+        <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="pkg-cta-zalo">💬</a>
       </div>
     </div>
   </div>
 
-  <div class="f-step sr sr-delay-2">
-    <div class="f-dot-wrap">
-      <div class="f-dot">3</div>
-    </div>
-    <div class="f-body">
-      <div class="f-title">🏢 Web Doanh Nghiệp SEO</div>
-      <div class="f-desc">5–7 trang, thiết kế theo brand, SEO on-page, Zalo OA, Facebook Pixel. 7–10 ngày.</div>
-      <div class="f-price-row">
-        <span class="f-old">5.000.000 ₫</span>
-        <span class="f-new">3.000.000 ₫</span>
+  <!-- GOI 3: Web Doanh Nghiep -->
+  <div class="pkg-item" data-cat="pro">
+    <button class="pkg-head" onclick="togglePkg(this)">
+      <div class="pkg-emoji">🏢</div>
+      <div class="pkg-head-left">
+        <div class="pkg-name">Web Doanh Nghiep SEO</div>
+        <div class="pkg-tagline">5-7 trang chuan SEO Google</div>
       </div>
-      <div class="f-tags">
-        <span class="f-tag">SEO</span>
-        <span class="f-tag">5–7 Trang</span>
-        <span class="f-tag">10 Ngày</span>
+      <div class="pkg-head-right">
+        <div class="pkg-badges"><span class="badge-best">SALE</span></div>
+        <div class="pkg-price-main">3.000.000 d</div>
+        <div class="pkg-price-old">5.000.000 d</div>
+      </div>
+      <span class="pkg-chevron">▼</span>
+    </button>
+    <div class="pkg-body">
+      <div class="pkg-meta">
+        <div class="meta-cell">
+          <div class="meta-val">5-7</div>
+          <div class="meta-lbl">So trang</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">7-10</div>
+          <div class="meta-lbl">Ngay BG</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">6 th</div>
+          <div class="meta-lbl">Bao hanh</div>
+        </div>
+      </div>
+
+      <div class="pkg-section-title">Tinh Nang Chinh</div>
+      <ul class="checklist">
+        <li class="check-item"><span class="check-icon">✓</span>Thiet ke UI/UX rieng theo bo nhan dien thuong hieu</li>
+        <li class="check-item"><span class="check-icon">✓</span>5-7 trang: Trang chu, Gioi thieu, Dich vu, Bang gia, Lien he, Blog</li>
+        <li class="check-item"><span class="check-icon">✓</span>He thong quan tri WordPress tieng Viet de tu cap nhat</li>
+        <li class="check-item"><span class="check-icon">✓</span>SEO On-page: the meta, URL chuan, heading structure, alt text</li>
+        <li class="check-item"><span class="check-icon">✓</span>Schema Markup (LocalBusiness, Service)</li>
+        <li class="check-item"><span class="check-icon">✓</span>Sitemap XML + robots.txt toi uu</li>
+        <li class="check-item"><span class="check-icon">✓</span>Google Search Console + Analytics 4</li>
+        <li class="check-item"><span class="check-icon">✓</span>Zalo OA tich hop + chat widget</li>
+        <li class="check-item"><span class="check-icon">✓</span>Facebook Pixel + su kien chuan</li>
+        <li class="check-item"><span class="check-icon">✓</span>Form lien he + thong bao email realtime</li>
+        <li class="check-item"><span class="check-icon">✓</span>PageSpeed 80+ tren mobile</li>
+        <li class="check-item"><span class="check-icon">✓</span>SSL + backup hang tuan</li>
+        <li class="check-item"><span class="check-icon">✓</span>Dao tao su dung WordPress (1 buoi)</li>
+        <li class="check-item check-item dimmed"><span class="check-icon no">✗</span>Blog SEO co he thong (them o goi Premium)</li>
+        <li class="check-item check-item dimmed"><span class="check-icon no">✗</span>He thong ban hang online</li>
+      </ul>
+
+      <div class="pkg-section-title">Cong Nghe</div>
+      <div class="tech-row">
+        <span class="tech-chip">WordPress</span>
+        <span class="tech-chip">Elementor Pro</span>
+        <span class="tech-chip">Yoast SEO</span>
+        <span class="tech-chip">Zalo API</span>
+        <span class="tech-chip">GA4</span>
+        <span class="tech-chip">Search Console</span>
+      </div>
+
+      <div class="pkg-section-title">Chinh Sach Bao Hanh</div>
+      <div class="warranty-box">
+        <span class="warranty-ico">🛡️</span>
+        <div class="warranty-text">
+          <strong>Bao hanh 6 thang:</strong> Sua loi phat sinh mien phi. Cap nhat plugin bao mat. Ho tro ky thuat qua Zalo T2-T7 (8h-18h). Chinh sua noi dung nho toi 3 lan/thang. Sau 6 thang: phi bao tri 350.000d/thang.
+        </div>
+      </div>
+
+      <div class="pkg-cta">
+        <a href="tel:0373453757" class="btn btn-primary pkg-cta-call">📞 Dat Goi Nay</a>
+        <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="pkg-cta-zalo">💬</a>
       </div>
     </div>
   </div>
 
-  <div class="f-step featured sr">
-    <div class="f-dot-wrap">
-      <div class="f-dot">4</div>
-    </div>
-    <div class="f-body">
-      <div class="f-badge">🔥 HOT</div>
-      <div class="f-title">⭐ Web Premium + Blog SEO</div>
-      <div class="f-desc">10+ trang, UI/UX cao cấp, hệ thống blog SEO, PageSpeed 90+, đào tạo sử dụng.</div>
-      <div class="f-price-row">
-        <span class="f-old">8.000.000 ₫</span>
-        <span class="f-new">5.000.000 ₫</span>
+  <!-- GOI 4: Premium HOT -->
+  <div class="pkg-item is-hot" data-cat="pro">
+    <button class="pkg-head" onclick="togglePkg(this)">
+      <div class="pkg-emoji">⭐</div>
+      <div class="pkg-head-left">
+        <div class="pkg-name">Web Premium + Blog SEO</div>
+        <div class="pkg-tagline">Chuan san xuat - ban hang tu dong</div>
       </div>
-      <div class="f-tags">
-        <span class="f-tag">10+ Trang</span>
-        <span class="f-tag">Blog SEO</span>
-        <span class="f-tag">PageSpeed 90+</span>
-        <span class="f-tag">Đào Tạo</span>
+      <div class="pkg-head-right">
+        <div class="pkg-badges">
+          <span class="badge-hot">HOT</span>
+          <span class="badge-best">SALE</span>
+        </div>
+        <div class="pkg-price-main">5.000.000 d</div>
+        <div class="pkg-price-old">8.000.000 d</div>
+      </div>
+      <span class="pkg-chevron">▼</span>
+    </button>
+    <div class="pkg-body">
+      <div class="pkg-meta">
+        <div class="meta-cell">
+          <div class="meta-val">10+</div>
+          <div class="meta-lbl">So trang</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">14-20</div>
+          <div class="meta-lbl">Ngay BG</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">12 th</div>
+          <div class="meta-lbl">Bao hanh</div>
+        </div>
+      </div>
+
+      <div class="pkg-section-title">Tinh Nang Chinh</div>
+      <ul class="checklist">
+        <li class="check-item"><span class="check-icon">✓</span>Tat ca tinh nang cua goi Doanh Nghiep SEO</li>
+        <li class="check-item"><span class="check-icon">✓</span>10+ trang: them Pricing, Case study, FAQ, Careers, Policy...</li>
+        <li class="check-item"><span class="check-icon">✓</span>He thong blog SEO: danh muc, tag, phan trang, related posts</li>
+        <li class="check-item"><span class="check-icon">✓</span>Giao dien UI/UX cao cap - thiet ke Figma rieng truoc khi code</li>
+        <li class="check-item"><span class="check-icon">✓</span>PageSpeed 90+ tren ca mobile va desktop</li>
+        <li class="check-item"><span class="check-icon">✓</span>Lazy loading, CDN, cache nang cao</li>
+        <li class="check-item"><span class="check-icon">✓</span>Popup uu dai + exit intent popup</li>
+        <li class="check-item"><span class="check-icon">✓</span>He thong review / danh gia khach hang</li>
+        <li class="check-item"><span class="check-icon">✓</span>Live chat Zalo + Messenger tich hop</li>
+        <li class="check-item"><span class="check-icon">✓</span>Email marketing form + Mailchimp/GetResponse</li>
+        <li class="check-item"><span class="check-icon">✓</span>Google Tag Manager cai dat su kien chuyen doi</li>
+        <li class="check-item"><span class="check-icon">✓</span>Backup tu dong hang ngay</li>
+        <li class="check-item"><span class="check-icon">✓</span>Dao tao WordPress nang cao (2 buoi)</li>
+        <li class="check-item"><span class="check-icon">✓</span>Bao cao SEO hang thang (3 thang dau)</li>
+      </ul>
+
+      <div class="pkg-section-title">Cong Nghe</div>
+      <div class="tech-row">
+        <span class="tech-chip">WordPress</span>
+        <span class="tech-chip">Elementor Pro</span>
+        <span class="tech-chip">Yoast SEO Premium</span>
+        <span class="tech-chip">WP Rocket</span>
+        <span class="tech-chip">GA4 + GTM</span>
+        <span class="tech-chip">Cloudflare CDN</span>
+        <span class="tech-chip">Mailchimp</span>
+        <span class="tech-chip">Zalo OA</span>
+      </div>
+
+      <div class="pkg-section-title">Chinh Sach Bao Hanh</div>
+      <div class="warranty-box">
+        <span class="warranty-ico">🛡️</span>
+        <div class="warranty-text">
+          <strong>Bao hanh 12 thang:</strong> Sua loi, cap nhat bao mat, ho tro ky thuat 7 ngay/tuan (8h-22h). Cap nhat noi dung khong gioi han lan nho. Review SEO hang quy. Sau 12 thang: goi bao tri 500.000d/thang (uu tien khach cu).
+        </div>
+      </div>
+
+      <div class="pkg-cta">
+        <a href="tel:0373453757" class="btn btn-primary pkg-cta-call">📞 Dat Goi Nay</a>
+        <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="pkg-cta-zalo">💬</a>
       </div>
     </div>
   </div>
 
-  <div class="f-step sr sr-delay-1">
-    <div class="f-dot-wrap">
-      <div class="f-dot">5</div>
-    </div>
-    <div class="f-body">
-      <div class="f-title">🛒 E-Commerce Full Stack</div>
-      <div class="f-desc">Bán hàng hoàn chỉnh: sản phẩm, giỏ hàng, VNPay/Momo, quản lý đơn, báo cáo doanh thu.</div>
-      <div class="f-price-row">
-        <span class="f-new">7.000.000 ₫</span>
+  <!-- GOI 5: E-Commerce -->
+  <div class="pkg-item" data-cat="ecom">
+    <button class="pkg-head" onclick="togglePkg(this)">
+      <div class="pkg-emoji">🛒</div>
+      <div class="pkg-head-left">
+        <div class="pkg-name">E-Commerce Full Stack</div>
+        <div class="pkg-tagline">He thong ban hang truc tuyen hoan chinh</div>
       </div>
-      <div class="f-tags">
-        <span class="f-tag">WooCommerce</span>
-        <span class="f-tag">Payment</span>
-        <span class="f-tag">Dashboard</span>
+      <div class="pkg-head-right">
+        <div class="pkg-price-main">7.000.000 d</div>
+        <div class="pkg-price-old">&nbsp;</div>
+      </div>
+      <span class="pkg-chevron">▼</span>
+    </button>
+    <div class="pkg-body">
+      <div class="pkg-meta">
+        <div class="meta-cell">
+          <div class="meta-val">15+</div>
+          <div class="meta-lbl">So trang</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">20-30</div>
+          <div class="meta-lbl">Ngay BG</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-val">12 th</div>
+          <div class="meta-lbl">Bao hanh</div>
+        </div>
+      </div>
+
+      <div class="pkg-section-title">Tinh Nang Chinh</div>
+      <ul class="checklist">
+        <li class="check-item"><span class="check-icon">✓</span>Tat ca tinh nang goi Premium</li>
+        <li class="check-item"><span class="check-icon">✓</span>He thong san pham: danh muc, loc, tim kiem, bien the</li>
+        <li class="check-item"><span class="check-icon">✓</span>Gio hang + quy trinh dat hang toi uu (1-click)</li>
+        <li class="check-item"><span class="check-icon">✓</span>Thanh toan: VNPay, Momo, ZaloPay, COD, Chuyen khoan</li>
+        <li class="check-item"><span class="check-icon">✓</span>Quan ly don hang + trang thai van chuyen</li>
+        <li class="check-item"><span class="check-icon">✓</span>Quan ly ton kho - canh bao het hang</li>
+        <li class="check-item"><span class="check-icon">✓</span>Ma giam gia / voucher / flash sale</li>
+        <li class="check-item"><span class="check-icon">✓</span>He thong danh gia san pham</li>
+        <li class="check-item"><span class="check-icon">✓</span>Dashboard bao cao doanh thu truc tiep</li>
+        <li class="check-item"><span class="check-icon">✓</span>Xuat bao cao Excel / CSV</li>
+        <li class="check-item"><span class="check-icon">✓</span>Tich hop GHTK / GHN giao hang tu dong</li>
+        <li class="check-item"><span class="check-icon">✓</span>Email xac nhan don hang tu dong</li>
+        <li class="check-item"><span class="check-icon">✓</span>Trang ca nhan khach hang - lich su mua hang</li>
+        <li class="check-item"><span class="check-icon">✓</span>Cai dat Google Merchant Center</li>
+      </ul>
+
+      <div class="pkg-section-title">Cong Nghe</div>
+      <div class="tech-row">
+        <span class="tech-chip">WordPress</span>
+        <span class="tech-chip">WooCommerce</span>
+        <span class="tech-chip">VNPay</span>
+        <span class="tech-chip">Momo</span>
+        <span class="tech-chip">ZaloPay</span>
+        <span class="tech-chip">GHTK API</span>
+        <span class="tech-chip">GHN API</span>
+        <span class="tech-chip">WP Rocket</span>
+        <span class="tech-chip">GA4 + GTM</span>
+      </div>
+
+      <div class="pkg-section-title">Chinh Sach Bao Hanh</div>
+      <div class="warranty-box">
+        <span class="warranty-ico">🛡️</span>
+        <div class="warranty-text">
+          <strong>Bao hanh 12 thang:</strong> Sua loi payment, loi he thong mien phi. Cap nhat bao mat. Ho tro khan cap qua Zalo 7 ngay (8h-22h). Dao tao su dung day du cho nhan vien (2-3 buoi). Sau 12 thang: goi bao tri 800.000d/thang.
+        </div>
+      </div>
+
+      <div class="pkg-cta">
+        <a href="tel:0373453757" class="btn btn-primary pkg-cta-call">📞 Dat Goi Nay</a>
+        <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="pkg-cta-zalo">💬</a>
       </div>
     </div>
+  </div>
+
+</div><!-- end pkg-list -->
+
+<!-- SO SANH GOI -->
+<div class="compare-wrap sr">
+  <button class="compare-toggle" id="cmpToggle" onclick="toggleCompare()">
+    📊 Xem Bang So Sanh Tinh Nang
+  </button>
+  <div class="compare-table-wrap" id="cmpTable">
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>Tinh nang</th>
+          <th>Landing</th>
+          <th>DN SEO</th>
+          <th class="highlight">Premium</th>
+          <th>E-Com</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>So trang</td>
+          <td><span class="cmp-val">1</span></td>
+          <td><span class="cmp-val">5-7</span></td>
+          <td class="highlight-col"><span class="cmp-val-gold">10+</span></td>
+          <td><span class="cmp-val">15+</span></td>
+        </tr>
+        <tr>
+          <td>Thoi gian BG</td>
+          <td><span class="cmp-val">3-5 ng</span></td>
+          <td><span class="cmp-val">7-10 ng</span></td>
+          <td class="highlight-col"><span class="cmp-val">14-20 ng</span></td>
+          <td><span class="cmp-val">20-30 ng</span></td>
+        </tr>
+        <tr>
+          <td>Thiet ke rieng</td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td class="highlight-col"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>He thong CMS</td>
+          <td><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td class="highlight-col"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>SEO On-page</td>
+          <td>Co ban</td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td class="highlight-col"><span class="cmp-val-gold">Nang cao</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Blog SEO</td>
+          <td><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-no">✗</span></td>
+          <td class="highlight-col"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>PageSpeed</td>
+          <td>80+</td>
+          <td>80+</td>
+          <td class="highlight-col"><span class="cmp-val-gold">90+</span></td>
+          <td>90+</td>
+        </tr>
+        <tr>
+          <td>Zalo OA</td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td class="highlight-col"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Google Analytics</td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+          <td class="highlight-col"><span class="cmp-yes">✓</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Ban hang online</td>
+          <td><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-no">✗</span></td>
+          <td class="highlight-col"><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Thanh toan online</td>
+          <td><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-no">✗</span></td>
+          <td class="highlight-col"><span class="cmp-no">✗</span></td>
+          <td><span class="cmp-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Dao tao su dung</td>
+          <td><span class="cmp-no">✗</span></td>
+          <td>1 buoi</td>
+          <td class="highlight-col"><span class="cmp-val-gold">2 buoi</span></td>
+          <td>2-3 buoi</td>
+        </tr>
+        <tr>
+          <td>Bao hanh</td>
+          <td>3 thang</td>
+          <td>6 thang</td>
+          <td class="highlight-col"><span class="cmp-val-gold">12 thang</span></td>
+          <td>12 thang</td>
+        </tr>
+        <tr>
+          <td>Gia</td>
+          <td>1.5tr d</td>
+          <td>3tr d</td>
+          <td class="highlight-col"><span class="cmp-val-gold">5tr d</span></td>
+          <td>7tr d</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <div class="funnel-cta sr">
-  <a href="tel:0373453757" class="btn-gold">
-    📞 Nhận Báo Giá – Miễn Phí
-  </a>
-  <p style="text-align:center; margin-top:12px; font-size:0.78rem; color:var(--muted);">Phản hồi trong 30 phút · Không ràng buộc</p>
+  <a href="tel:0373453757" class="btn btn-primary">📞 Goi Tu Van Chon Goi - Mien Phi</a>
+  <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="btn btn-zalo">💬 Nhan Zalo Bao Gia</a>
+  <p class="cta-note">Phan hoi trong 30 phut · Khong rang buoc · Thanh toan linh hoat</p>
 </div>
 ```
 
   </div>
 </section>
 
-<!-- ═══════════════ PROCESS ═══════════════ -->
+<!-- ──────── PROCESS ──────── -->
 
-<section class="process-section" id="process">
-  <div class="container">
-    <div class="label sr">Quy Trình</div>
-    <div class="display display-md mt-8 sr sr-delay-1"><em class="italic gold-text">4 Bước</em><br>Web Đỉnh Cao</div>
+<section class="process-bg" id="process">
+  <div class="wrap">
+    <div class="sec-label sr">Quy Trình</div>
+    <h2 class="font-display text-lg sr d1"><em class="text-gold">4 Bước</em><br>Web Đỉnh Cao</h2>
 
 ```
-<div class="process-cards sr sr-delay-2">
-  <div class="p-card">
-    <div class="p-num">01</div>
-    <span class="p-icon">💬</span>
-    <h4>Tiếp Nhận & Tư Vấn</h4>
-    <p>Gặp online/offline, lắng nghe nhu cầu, phân tích đối thủ, đề xuất giải pháp.</p>
+<div class="steps-grid sr d2">
+  <div class="step-card">
+    <div class="step-glow"></div>
+    <div class="step-n">01</div>
+    <span class="step-ico">💬</span>
+    <h4>Tiếp Nhận &amp; Tư Vấn</h4>
+    <p>Gặp online/offline, lắng nghe nhu cầu, phân tích đối thủ.</p>
   </div>
-  <div class="p-card">
-    <div class="p-num">02</div>
-    <span class="p-icon">🎨</span>
+  <div class="step-card">
+    <div class="step-glow"></div>
+    <div class="step-n">02</div>
+    <span class="step-ico">🎨</span>
     <h4>Thiết Kế Mockup</h4>
-    <p>Phác thảo trên Figma, trình bày và chỉnh sửa đến khi ưng ý 100%.</p>
+    <p>Phác thảo Figma, chỉnh sửa đến khi ưng ý 100%.</p>
   </div>
-  <div class="p-card">
-    <div class="p-num">03</div>
-    <span class="p-icon">⚙️</span>
-    <h4>Lập Trình & Test</h4>
-    <p>Code theo thiết kế, kiểm thử đa thiết bị, tối ưu tốc độ và bảo mật.</p>
+  <div class="step-card">
+    <div class="step-glow"></div>
+    <div class="step-n">03</div>
+    <span class="step-ico">⚙️</span>
+    <h4>Lập Trình &amp; Test</h4>
+    <p>Code theo thiết kế, test đa thiết bị, tối ưu tốc độ.</p>
   </div>
-  <div class="p-card">
-    <div class="p-num">04</div>
-    <span class="p-icon">🚀</span>
-    <h4>Bàn Giao & Hỗ Trợ</h4>
-    <p>Đưa lên hosting, đào tạo sử dụng, hỗ trợ kỹ thuật dài hạn qua Zalo.</p>
+  <div class="step-card">
+    <div class="step-glow"></div>
+    <div class="step-n">04</div>
+    <span class="step-ico">🚀</span>
+    <h4>Bàn Giao &amp; Hỗ Trợ</h4>
+    <p>Đưa lên hosting, đào tạo dùng, hỗ trợ dài hạn qua Zalo.</p>
   </div>
 </div>
 ```
@@ -1478,171 +2204,180 @@ UTILS
   </div>
 </section>
 
-<!-- ═══════════════ PORTFOLIO ═══════════════ -->
+<!-- ──────── PORTFOLIO ──────── -->
 
-<section class="portfolio-section" id="portfolio">
-  <div class="container">
-    <div class="label sr">Dự Án</div>
-    <div class="display display-md mt-8 sr sr-delay-1">Portfolio<br><em class="italic gold-text">Nổi Bật</em></div>
-  </div>
-
-  <div class="port-scroll sr sr-delay-2">
-    <div class="port-card">
-      <div class="port-thumb">
-        <span>🛍️</span>
-        <span class="port-thumb-label">Thêm ảnh tại đây</span>
-        <div class="port-cat">E-Commerce</div>
-      </div>
-      <div class="port-info">
-        <h4>Thời Trang Online</h4>
-        <p>WooCommerce · 300+ SP · Thanh toán đa kênh</p>
-      </div>
-    </div>
-    <div class="port-card">
-      <div class="port-thumb">
-        <span>🏥</span>
-        <span class="port-thumb-label">Thêm ảnh tại đây</span>
-        <div class="port-cat">Y Tế</div>
-      </div>
-      <div class="port-info">
-        <h4>Phòng Khám Nha Khoa</h4>
-        <p>Đặt lịch online · CRM · SEO y tế</p>
-      </div>
-    </div>
-    <div class="port-card">
-      <div class="port-thumb">
-        <span>🏗️</span>
-        <span class="port-thumb-label">Thêm ảnh tại đây</span>
-        <div class="port-cat">Bất Động Sản</div>
-      </div>
-      <div class="port-info">
-        <h4>Dự Án BĐS Cao Cấp</h4>
-        <p>Landing page · Video hero · Lead CRM</p>
-      </div>
-    </div>
-    <div class="port-card">
-      <div class="port-thumb">
-        <span>📚</span>
-        <span class="port-thumb-label">Thêm ảnh tại đây</span>
-        <div class="port-cat">Giáo Dục</div>
-      </div>
-      <div class="port-info">
-        <h4>Trung Tâm Anh Ngữ</h4>
-        <p>Đăng ký khóa học · Blog SEO · Cổng học viên</p>
-      </div>
-    </div>
-    <div class="port-card">
-      <div class="port-thumb">
-        <span>🍜</span>
-        <span class="port-thumb-label">Thêm ảnh tại đây</span>
-        <div class="port-cat">F&B</div>
-      </div>
-      <div class="port-info">
-        <h4>Chuỗi Nhà Hàng Việt</h4>
-        <p>Menu online · Đặt bàn · Loyalty program</p>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <p class="port-scroll-hint sr">← Vuốt để xem thêm →</p>
-  </div>
-</section>
-
-<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
-
-<section class="testi-section" id="testimonials">
-  <div class="container">
-    <div class="label sr">Khách Hàng Nói Gì</div>
-    <div class="display display-md mt-8 sr sr-delay-1">Họ Tin<br><em class="italic gold-text">PixelForge</em></div>
-  </div>
-
-  <div class="testi-scroll sr sr-delay-2">
-    <div class="t-card">
-      <div class="t-stars">★★★★★</div>
-      <p class="t-quote">Website làm xong đẹp hơn tôi tưởng tượng rất nhiều. Team nhiệt tình, phản hồi nhanh, chỉnh sửa ngay. Doanh thu online tăng 40% sau 2 tháng.</p>
-      <div class="t-author">
-        <div class="t-ava">T</div>
-        <div>
-          <div class="t-name">Chị Thanh Hà</div>
-          <div class="t-role">CEO · Thời trang HANA</div>
-        </div>
-      </div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars">★★★★★</div>
-      <p class="t-quote">Đã làm qua 3 đơn vị khác nhưng đây là lần đầu tôi thực sự hài lòng. Code sạch, tốc độ rất nhanh và hỗ trợ sau bàn giao rất tốt.</p>
-      <div class="t-author">
-        <div class="t-ava" style="background:linear-gradient(135deg,#0068ff,#00c6fb);">M</div>
-        <div>
-          <div class="t-name">Anh Minh Tuấn</div>
-          <div class="t-role">Chủ phòng khám · NhaTien Dental</div>
-        </div>
-      </div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars">★★★★★</div>
-      <p class="t-quote">Landing page làm lead về ào ào, chi phí quảng cáo giảm 30% vì tỉ lệ chuyển đổi tăng mạnh. PixelForge thực sự hiểu marketing.</p>
-      <div class="t-author">
-        <div class="t-ava" style="background:linear-gradient(135deg,#f04c2f,#ff9800);">P</div>
-        <div>
-          <div class="t-name">Anh Phúc Nguyên</div>
-          <div class="t-role">Marketing · EduPlus</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ FAQ ═══════════════ -->
-
-<section class="faq-section" id="faq">
-  <div class="container">
-    <div class="label sr">FAQ</div>
-    <div class="display display-md mt-8 sr sr-delay-1">Câu Hỏi<br><em class="italic gold-text">Thường Gặp</em></div>
+<section class="port-bg" id="portfolio">
+  <div class="wrap">
+    <div class="sec-label sr">Dự Án</div>
+    <h2 class="font-display text-lg sr d1">Portfolio<br><em class="text-gold">Nổi Bật</em></h2>
 
 ```
-<div class="faq-list mt-36 sr sr-delay-2">
+<div class="port-cards">
+  <div class="port-card sr d1">
+    <div class="port-thumb">
+      <div class="port-thumb-shine"></div>
+      <span class="port-thumb-emoji">🛍️</span>
+      <span class="port-thumb-hint">Thêm ảnh tại đây</span>
+      <span class="port-cat">E-Commerce</span>
+    </div>
+    <div class="port-body">
+      <h4>Cửa Hàng Thời Trang Online</h4>
+      <p>WooCommerce · 300+ sản phẩm · Thanh toán đa kênh · Quản lý tồn kho</p>
+    </div>
+  </div>
+
+  <div class="port-card sr d2">
+    <div class="port-thumb">
+      <div class="port-thumb-shine"></div>
+      <span class="port-thumb-emoji">🏥</span>
+      <span class="port-thumb-hint">Thêm ảnh tại đây</span>
+      <span class="port-cat">Y Tế</span>
+    </div>
+    <div class="port-body">
+      <h4>Phòng Khám Nha Khoa</h4>
+      <p>Đặt lịch online · CRM tích hợp · Chuẩn SEO y tế · Zalo OA</p>
+    </div>
+  </div>
+
+  <div class="port-card sr d3">
+    <div class="port-thumb">
+      <div class="port-thumb-shine"></div>
+      <span class="port-thumb-emoji">🏗️</span>
+      <span class="port-thumb-hint">Thêm ảnh tại đây</span>
+      <span class="port-cat">Bất Động Sản</span>
+    </div>
+    <div class="port-body">
+      <h4>Dự Án BDS Cao Cấp</h4>
+      <p>Landing page · Video hero · Lead form · CRM tích hợp</p>
+    </div>
+  </div>
+
+  <div class="port-card sr">
+    <div class="port-thumb">
+      <div class="port-thumb-shine"></div>
+      <span class="port-thumb-emoji">📚</span>
+      <span class="port-thumb-hint">Thêm ảnh tại đây</span>
+      <span class="port-cat">Giáo Dục</span>
+    </div>
+    <div class="port-body">
+      <h4>Trung Tâm Anh Ngữ</h4>
+      <p>Đăng ký khóa học · Blog SEO · Cổng học viên</p>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ──────── TESTIMONIALS ──────── -->
+
+<section class="testi-bg" id="testimonials">
+  <div class="wrap">
+    <div class="sec-label sr">Khách Hàng Nói Gì</div>
+    <h2 class="font-display text-lg sr d1">Họ Tin<br><em class="text-gold">PixelForge</em></h2>
+
+```
+<div class="testi-cards">
+  <div class="testi-card sr d1">
+    <div class="t-stars">★★★★★</div>
+    <span class="t-big-quote">"</span>
+    <p class="t-text">Website làm xong đẹp hơn tôi tưởng tượng rất nhiều. Team nhiệt tình, phản hồi nhanh, chỉnh sửa ngay. Doanh thu online tăng 40% sau 2 tháng bàn giao.</p>
+    <div class="t-author">
+      <div class="t-ava">T</div>
+      <div>
+        <div class="t-name">Chị Thanh Ha</div>
+        <div class="t-role">CEO · Thoi trang HANA</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testi-card sr d2">
+    <div class="t-stars">★★★★★</div>
+    <span class="t-big-quote">"</span>
+    <p class="t-text">Da lam qua 3 don vi khac nhung day la lan dau toi thuc su hai long. Code sach, toc do rat nhanh va ho tro sau ban giao rat tot.</p>
+    <div class="t-author">
+      <div class="t-ava" style="background:linear-gradient(135deg,#0068ff,#00aaff)">M</div>
+      <div>
+        <div class="t-name">Anh Minh Tuan</div>
+        <div class="t-role">Chu phong kham · NhaTien Dental</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testi-card sr d3">
+    <div class="t-stars">★★★★★</div>
+    <span class="t-big-quote">"</span>
+    <p class="t-text">Landing page lam lead ve ao ao, chi phi quang cao giam 30% vi ti le chuyen doi tang manh. PixelForge thuc su hieu marketing chuyen sau.</p>
+    <div class="t-author">
+      <div class="t-ava" style="background:linear-gradient(135deg,#e84d2a,#ff8c00)">P</div>
+      <div>
+        <div class="t-name">Anh Phuc Nguyen</div>
+        <div class="t-role">Marketing Manager · EduPlus</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ──────── FAQ ──────── -->
+
+<section class="faq-bg" id="faq">
+  <div class="wrap">
+    <div class="sec-label sr">FAQ</div>
+    <h2 class="font-display text-lg sr d1">Cau Hoi<br><em class="text-gold">Thuong Gap</em></h2>
+
+```
+<div class="faq-list sr d2">
   <div class="faq-item open">
-    <button class="faq-btn" onclick="toggleFaq(this)">
-      Làm website mất bao lâu?
-      <div class="faq-chevron">+</div>
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Lam website mat bao lau?
+      <span class="faq-icon">+</span>
     </button>
-    <div class="faq-answer">Landing page 3–5 ngày, web doanh nghiệp 7–14 ngày, e-commerce 15–25 ngày. Thời gian có thể thay đổi nếu cần nhiều lần chỉnh thiết kế.</div>
+    <div class="faq-a">Landing page 3-5 ngay, web doanh nghiep 7-14 ngay, e-commerce 15-25 ngay. Thoi gian thuc te co the thay doi neu can nhieu lan chinh thiet ke.</div>
   </div>
+
   <div class="faq-item">
-    <button class="faq-btn" onclick="toggleFaq(this)">
-      Tự chỉnh sửa nội dung được không?
-      <div class="faq-chevron">+</div>
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Tu chinh sua noi dung duoc khong?
+      <span class="faq-icon">+</span>
     </button>
-    <div class="faq-answer">Được! Web dùng WordPress tiếng Việt dễ dùng. Chúng tôi đào tạo sau bàn giao và hỗ trợ qua Zalo khi cần thêm.</div>
+    <div class="faq-a">Duoc! Web dung WordPress tieng Viet de dung. Chung toi dao tao sau ban giao va ho tro qua Zalo khi can them.</div>
   </div>
+
   <div class="faq-item">
-    <button class="faq-btn" onclick="toggleFaq(this)">
-      Website có chuẩn SEO không?
-      <div class="faq-chevron">+</div>
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Website co chuan SEO khong?
+      <span class="faq-icon">+</span>
     </button>
-    <div class="faq-answer">Có. Tất cả web đều có SEO kỹ thuật cơ bản: thẻ meta, URL chuẩn, schema markup, sitemap XML và Google Search Console.</div>
+    <div class="faq-a">Co. Tat ca web deu co SEO ky thuat co ban: the meta, URL chuan, schema markup, sitemap XML va Google Search Console.</div>
   </div>
+
   <div class="faq-item">
-    <button class="faq-btn" onclick="toggleFaq(this)">
-      Hosting và domain tính riêng không?
-      <div class="faq-chevron">+</div>
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Hosting va domain tinh rieng khong?
+      <span class="faq-icon">+</span>
     </button>
-    <div class="faq-answer">Tính riêng khoảng 1.200.000–2.000.000₫/năm tùy cấu hình. Chúng tôi tư vấn và hỗ trợ đăng ký, không phí ẩn.</div>
+    <div class="faq-a">Tinh rieng khoang 1.200.000-2.000.000 dong/nam tuy cau hinh. Chung toi tu van va ho tro dang ky, khong phi an.</div>
   </div>
+
   <div class="faq-item">
-    <button class="faq-btn" onclick="toggleFaq(this)">
-      Có bảo hành không?
-      <div class="faq-chevron">+</div>
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Co bao hanh khong?
+      <span class="faq-icon">+</span>
     </button>
-    <div class="faq-answer">Bảo hành 6–12 tháng tùy gói: sửa lỗi, cập nhật bảo mật, hỗ trợ kỹ thuật qua Zalo. Sau bảo hành có gói bảo trì hàng tháng.</div>
+    <div class="faq-a">Bao hanh 6-12 thang tuy goi: sua loi, cap nhat bao mat, ho tro ky thuat qua Zalo. Sau bao hanh co goi bao tri hang thang.</div>
   </div>
+
   <div class="faq-item">
-    <button class="faq-btn" onclick="toggleFaq(this)">
-      Thanh toán như thế nào?
-      <div class="faq-chevron">+</div>
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Thanh toan nhu the nao?
+      <span class="faq-icon">+</span>
     </button>
-    <div class="faq-answer">50% khi ký hợp đồng và bắt đầu, 50% sau khi duyệt thiết kế xong. Hỗ trợ chuyển khoản, Momo, ZaloPay.</div>
+    <div class="faq-a">50% khi ky hop dong va bat dau, 50% sau khi duyet thiet ke xong. Ho tro chuyen khoan, Momo, ZaloPay.</div>
   </div>
 </div>
 ```
@@ -1650,36 +2385,37 @@ UTILS
   </div>
 </section>
 
-<!-- ═══════════════ CTA SECTION ═══════════════ -->
+<!-- ──────── CTA BAND ──────── -->
 
-<section class="cta-section" id="contact">
-  <div class="container">
-    <div class="label sr">Bắt Đầu Ngay</div>
-    <div class="display display-md mt-8 sr sr-delay-1">Sẵn Sàng Đưa<br><em class="italic gold-text">Doanh Nghiệp</em><br>Lên Online?</div>
-    <p class="cta-sub sr sr-delay-2">Tư vấn 1-1 hoàn toàn miễn phí. Đội ngũ PixelForge phản hồi trong 30 phút.</p>
+<section class="cta-bg" id="contact">
+  <div class="cta-halo"></div>
+  <div class="wrap">
+    <div class="sec-label cta-label sr">Bat Dau Ngay</div>
+    <h2 class="font-display text-lg sr d1">San Sang Dua<br><em class="text-gold">Doanh Nghiep</em><br>Len Online?</h2>
+    <p class="cta-sub sr d2">Tu van 1-1 hoan toan mien phi. PixelForge phan hoi trong 30 phut.</p>
 
 ```
-<div class="cta-btns sr sr-delay-3">
-  <a href="tel:0373453757" class="btn-gold">
-    📞 Gọi: 037.345.3757
-  </a>
-  <a href="https://zalo.me/0373453757" target="_blank" class="btn-zalo">
-    💬 Nhắn Zalo Ngay
-  </a>
+<div class="cta-btns sr d3">
+  <a href="tel:0373453757" class="btn btn-primary">📞 Goi: 037.345.3757</a>
+  <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="btn btn-zalo">💬 Nhan Zalo Ngay</a>
 </div>
 
-<div class="cta-trust sr">
+<div class="trust-row sr">
   <div class="trust-item">
-    <span>⚡</span>
-    <span>Phản hồi<br>30 phút</span>
+    <span class="trust-ico">⚡</span>
+    <span class="trust-txt">Phan hoi<br>30 phut</span>
   </div>
   <div class="trust-item">
-    <span>💯</span>
-    <span>Hoàn tiền<br>nếu không OK</span>
+    <span class="trust-ico">💯</span>
+    <span class="trust-txt">Hoan tien<br>neu khong OK</span>
   </div>
   <div class="trust-item">
-    <span>📋</span>
-    <span>Hợp đồng<br>minh bạch</span>
+    <span class="trust-ico">🔒</span>
+    <span class="trust-txt">Bao mat<br>thong tin</span>
+  </div>
+  <div class="trust-item">
+    <span class="trust-ico">📋</span>
+    <span class="trust-txt">Hop dong<br>minh bach</span>
   </div>
 </div>
 ```
@@ -1687,59 +2423,55 @@ UTILS
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
+<!-- ──────── FOOTER ──────── -->
 
-<footer>
-  <span class="footer-logo">Pixel<span style="color:var(--red);-webkit-text-fill-color:var(--red);">Forge</span></span>
-  <p class="footer-desc">Chuyên thiết kế website chuyên nghiệp, chuẩn SEO, tốc độ cao – giúp doanh nghiệp Việt bứt phá doanh thu.</p>
+<footer class="site-footer">
+  <span class="footer-logo">Pixel<span class="footer-logo-dot">.</span>Forge</span>
+  <p class="footer-desc">Chuyen thiet ke website chuyen nghiep, chuan SEO, toc do cao - giup doanh nghiep Viet but pha doanh thu online.</p>
 
-  <div class="footer-links">
-    <div class="fl-group">
-      <h5>Dịch Vụ</h5>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h5>Dich Vu</h5>
       <ul>
         <li><a href="#">Landing Page</a></li>
-        <li><a href="#">Web Doanh Nghiệp</a></li>
+        <li><a href="#">Web Doanh Nghiep</a></li>
         <li><a href="#">E-Commerce</a></li>
         <li><a href="#">SEO</a></li>
-        <li><a href="#">Bảo Trì</a></li>
+        <li><a href="#">Bao Tri</a></li>
       </ul>
     </div>
-    <div class="fl-group">
-      <h5>Liên Hệ</h5>
+    <div class="footer-col">
+      <h5>Lien He</h5>
       <ul>
         <li><a href="tel:0373453757">📞 037.345.3757</a></li>
         <li><a href="https://zalo.me/0373453757">💬 Zalo Chat</a></li>
-        <li><a href="#">📍 Hà Nội, VN</a></li>
-        <li><a href="#">🕐 T2–T7: 8–18h</a></li>
+        <li><a href="#">📍 Ha Noi, VN</a></li>
+        <li><a href="#">🕐 T2-T7: 8-18h</a></li>
       </ul>
     </div>
   </div>
 
-  <div class="footer-divider"></div>
-
-  <div class="footer-bottom">
-    <p>© 2024 PixelForge Studio. All rights reserved.</p>
-    <p>Made with ❤️ in Vietnam 🇻🇳</p>
-  </div>
+  <div class="footer-hr"></div>
+  <p class="footer-copy">© 2025 PixelForge Studio. All rights reserved.<br>Made with ❤️ in Vietnam 🇻🇳</p>
 </footer>
 
-<!-- ═══════════════ FLOAT SPACER ═══════════════ -->
+<!-- spacer so float bar doesn't hide last content -->
 
 <div class="float-spacer"></div>
 
-<!-- ═══════════════ FLOATING CTA ═══════════════ -->
+<!-- ──────── FLOAT BAR ──────── -->
 
-<div class="float-cta" id="floatCta">
+<div class="float-bar" id="floatBar">
   <a href="tel:0373453757" class="float-btn float-call">
     <div class="float-ava">📞</div>
-    <div class="float-text">
-      Gọi Ngay
+    <div class="float-label">
+      Goi Ngay
       <small>037.345.3757</small>
     </div>
   </a>
-  <a href="https://zalo.me/0373453757" target="_blank" class="float-btn float-zalo">
+  <a href="https://zalo.me/0373453757" target="_blank" rel="noopener" class="float-btn float-zalo-btn">
     <div class="float-ava">💬</div>
-    <div class="float-text">
+    <div class="float-label">
       Zalo Chat
       <small>037.345.3757</small>
     </div>
@@ -1747,92 +2479,168 @@ UTILS
 </div>
 
 <script>
-/* ─── FAQ ─── */
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-}
+(function() {
+  'use strict';
 
-/* ─── SCROLL REVEAL ─── */
-const srEls = document.querySelectorAll('.sr');
-const srObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      srObserver.unobserve(e.target);
+  /* ── PACKAGE ACCORDION ── */
+  function togglePkg(btn) {
+    var item = btn.closest('.pkg-item');
+    var isOpen = item.classList.contains('is-open');
+    // close all
+    document.querySelectorAll('.pkg-item').forEach(function(el) {
+      el.classList.remove('is-open');
+    });
+    if (!isOpen) {
+      item.classList.add('is-open');
+      // smooth scroll into view
+      setTimeout(function() {
+        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
     }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-srEls.forEach(el => srObserver.observe(el));
+  }
+  window.togglePkg = togglePkg;
 
-/* ─── COUNT UP ─── */
-function countUp(el) {
-  const target = parseInt(el.dataset.count);
-  const suffix = el.dataset.suffix || '';
-  let current = 0;
-  const inc = target / 50;
-  const timer = setInterval(() => {
-    current += inc;
-    if (current >= target) {
-      current = target;
-      clearInterval(timer);
+  /* ── PACKAGE TAB FILTER ── */
+  function filterPkg(cat, tabEl) {
+    // update active tab
+    document.querySelectorAll('.pkg-tab').forEach(function(t) {
+      t.classList.remove('active');
+    });
+    tabEl.classList.add('active');
+    // show/hide items
+    document.querySelectorAll('.pkg-item').forEach(function(item) {
+      var itemCat = item.getAttribute('data-cat');
+      if (cat === 'all' || itemCat === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+        item.classList.remove('is-open');
+      }
+    });
+  }
+  window.filterPkg = filterPkg;
+
+  /* ── COMPARE TABLE TOGGLE ── */
+  function toggleCompare() {
+    var table = document.getElementById('cmpTable');
+    var btn = document.getElementById('cmpToggle');
+    if (table.classList.contains('show')) {
+      table.classList.remove('show');
+      btn.textContent = '\uD83D\uDCCA Xem Bang So Sanh Tinh Nang';
+    } else {
+      table.classList.add('show');
+      btn.textContent = '\uD83D\uDCCA An Bang So Sanh';
+      setTimeout(function() {
+        table.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
     }
-    el.textContent = Math.floor(current) + suffix;
-  }, 25);
-}
+  }
+  window.toggleCompare = toggleCompare;
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(el) {
+      el.classList.remove('open');
+    });
+    if (!isOpen) item.classList.add('open');
+  }
+  window.toggleFaq = toggleFaq;
 
-const statsObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('[data-count]').forEach(countUp);
-      statsObs.unobserve(e.target);
-    }
+  /* ── SCROLL REVEAL ── */
+  var srItems = document.querySelectorAll('.sr');
+  if ('IntersectionObserver' in window) {
+    var srObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          srObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+    srItems.forEach(function(el) { srObs.observe(el); });
+  } else {
+    srItems.forEach(function(el) { el.classList.add('on'); });
+  }
+
+  /* ── COUNT UP ── */
+  function runCount(el) {
+    var target = parseInt(el.getAttribute('data-target'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    var count = 0;
+    var step = target / 55;
+    var id = setInterval(function() {
+      count += step;
+      if (count >= target) {
+        count = target;
+        clearInterval(id);
+      }
+      el.textContent = Math.floor(count) + suffix;
+    }, 22);
+  }
+
+  var statsEl = document.querySelector('.hero-stats');
+  if (statsEl && 'IntersectionObserver' in window) {
+    var cObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        statsEl.querySelectorAll('[data-target]').forEach(runCount);
+        cObs.disconnect();
+      }
+    }, { threshold: 0.5 });
+    cObs.observe(statsEl);
+  }
+
+  /* ── FLOAT BAR: hide near footer ── */
+  var floatBar = document.getElementById('floatBar');
+  var footerEl = document.querySelector('.site-footer');
+  if (floatBar && footerEl && 'IntersectionObserver' in window) {
+    var fObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        floatBar.classList.add('hidden');
+      } else {
+        floatBar.classList.remove('hidden');
+      }
+    }, { threshold: 0.05 });
+    fObs.observe(footerEl);
+  }
+
+  /* ── NAVBAR darker on scroll ── */
+  var navbar = document.querySelector('.navbar-inner');
+  if (navbar) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 30) {
+        navbar.style.background = 'rgba(8,8,16,0.97)';
+      } else {
+        navbar.style.background = 'rgba(8,8,16,0.85)';
+      }
+    }, { passive: true });
+  }
+
+  /* ── SMOOTH ANCHOR SCROLL ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var id = a.getAttribute('href');
+      var target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
-}, { threshold: 0.5 });
-const heroStats = document.querySelector('.hero-stats');
-if (heroStats) statsObs.observe(heroStats);
 
-/* ─── FLOAT CTA: hide when near footer ─── */
-const floatCta = document.getElementById('floatCta');
-const footerEl = document.querySelector('footer');
-
-const hideObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    floatCta.style.opacity = e.isIntersecting ? '0' : '1';
-    floatCta.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
-    floatCta.style.transform = e.isIntersecting ? 'translateY(20px)' : 'translateY(0)';
+  /* ── TOUCH FEEDBACK on service rows ── */
+  document.querySelectorAll('.svc-row').forEach(function(row) {
+    row.addEventListener('touchstart', function() {
+      row.classList.add('touched');
+    }, { passive: true });
+    row.addEventListener('touchend', function() {
+      setTimeout(function() { row.classList.remove('touched'); }, 350);
+    }, { passive: true });
+    row.addEventListener('touchcancel', function() {
+      row.classList.remove('touched');
+    }, { passive: true });
   });
-}, { threshold: 0.1 });
-if (footerEl) hideObs.observe(footerEl);
-floatCta.style.transition = 'opacity 0.3s, transform 0.3s';
 
-/* ─── NAVBAR: darker on scroll ─── */
-const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-  navbar.style.background = window.scrollY > 40
-    ? 'rgba(12,12,15,0.97)'
-    : 'rgba(12,12,15,0.88)';
-}, { passive: true });
-
-/* ─── SMOOTH SCROLL for anchor links ─── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const target = document.querySelector(id);
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-/* ─── Touch feedback on service cards ─── */
-document.querySelectorAll('.svc-card').forEach(card => {
-  card.addEventListener('touchstart', () => card.classList.add('active'), { passive: true });
-  card.addEventListener('touchend', () => setTimeout(() => card.classList.remove('active'), 300), { passive: true });
-});
+})();
 </script>
 
 </body>
